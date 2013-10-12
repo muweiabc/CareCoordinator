@@ -76,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:checked="true"
             android:text="@string/alertconf_call" />
         
         <CheckBox
@@ -83,6 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:checked="true"
             android:text="@string/alertconf_text" />
     </LinearLayout>
 

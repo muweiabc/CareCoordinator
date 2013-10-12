@@ -1,4 +1,4 @@
-package cis573.carecood;
+package cis573.carecoor;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

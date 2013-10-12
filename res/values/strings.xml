@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CareCood</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="app_name">Care Coordinator</string>
+	
+    <string name="alertconf_primary_num">Primary Number</string>
+    <string name="alertconf_secondary_num">Secondary Number</string>
+    <string name="alertconf_call">Call</string>
+    <string name="alertconf_text">Text</string>
 </resources>

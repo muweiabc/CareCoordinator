@@ -41,7 +41,13 @@ public class MainActivity extends FragmentActivity {
 
 		@Override
 		public Fragment getItem(int arg0) {
-			return DummyFragment.newInstance(PAGE_TITLES[arg0]);
+			Fragment f;
+			if(arg0 == 0) {
+				f = new AlertConfFragment();
+			} else {
+				f = DummyFragment.newInstance(PAGE_TITLES[arg0]);
+			}
+			return f;
 		}
 
 		@Override

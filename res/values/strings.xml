@@ -7,4 +7,10 @@
     <string name="alertconf_secondary_num">Secondary Number</string>
     <string name="alertconf_call">Call</string>
     <string name="alertconf_text">Text</string>
+    <string name="btn_alert">ALERT</string>
+    <string name="dialog_alert_cfm_title">Alert</string>
+    <string name="dialog_alert_cfm">Make an alert call?</string>
+    <string name="dialog_alert_secondary">Got helped? If not, you can choose to make an alert call to the primary or secondary number</string>
+    <string name="dialog_alert_primary_again">Primary</string>
+    <string name="dialog_alert_secondary_again">Secondary</string>
 </resources>

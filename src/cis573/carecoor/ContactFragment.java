@@ -17,6 +17,7 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import cis573.carecoor.adapter.ContactAdapter;
 import cis573.carecoor.bean.Contact;
+import cis573.carecoor.utils.FileKit;
 
 public class ContactFragment extends Fragment {
 
@@ -33,7 +34,10 @@ public class ContactFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mUserContacts = new ArrayList<Contact>();
+		mUserContacts = FileKit.readUserContacts(getActivity());
+		if(mUserContacts == null) {
+			mUserContacts = new ArrayList<Contact>();
+		}
 		initAddContactDialog();
 	}
 
@@ -54,6 +58,8 @@ public class ContactFragment extends Fragment {
 			}
 		});
 		mAdapter = new ContactAdapter(getActivity());
+		addUsefulContacts();
+		mAdapter.setContactList2(mUserContacts);
 		mListView.setAdapter(mAdapter);
 		return view;
 	}
@@ -61,7 +67,6 @@ public class ContactFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		addUsefulContacts();
 		for(int i = 0; i < mAdapter.getGroupCount(); i++) {
 			mListView.expandGroup(i);
 		}
@@ -100,6 +105,7 @@ public class ContactFragment extends Fragment {
 				String name = etName.getText().toString();
 				String phone = etPhone.getText().toString();
 				mUserContacts.add(new Contact(name, phone));
+				FileKit.saveUserContacts(getActivity(), mUserContacts);
 				mAdapter.setContactList2(mUserContacts);
 				mAdapter.notifyDataSetChanged();
 			}

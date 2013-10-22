@@ -13,4 +13,11 @@
     <string name="dialog_alert_secondary">Got helped? If not, you can choose to make an alert call to the primary or secondary number</string>
     <string name="dialog_alert_primary_again">Primary</string>
     <string name="dialog_alert_secondary_again">Secondary</string>
+    
+    <!-- Contact -->
+    <string name="btn_add_sign"> + </string>
+    <string name="btn_import">Import</string>
+    <string name="dialog_add_contact_title">Add New Contact</string>
+    <string name="dialog_contact_name">Name</string>
+    <string name="dialog_contact_phone">Phone</string>
 </resources>

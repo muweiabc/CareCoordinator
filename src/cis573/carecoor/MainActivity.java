@@ -131,8 +131,10 @@ public class MainActivity extends FragmentActivity {
 		@Override
 		public Fragment getItem(int arg0) {
 			Fragment f;
-			if(arg0 == 0) {
+			if(arg0 == 0) {	// Alert
 				f = new AlertConfFragment();
+			} else if(arg0 == 1) {	// Contact
+				f = new ContactFragment();
 			} else {
 				f = DummyFragment.newInstance(PAGE_TITLES[arg0]);
 			}

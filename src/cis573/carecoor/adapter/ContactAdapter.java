@@ -130,7 +130,7 @@ public class ContactAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		return false;
+		return true;
 	}
 
 	static class GroupViewHolder {

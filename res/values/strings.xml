@@ -2,9 +2,15 @@
 <resources>
 
     <string name="app_name">Care Coordinator</string>
+    
+    <string name="msg_empty_phone_number">Phone number cannot be empty</string>
+    <string name="msg_primary_number_empty">Primary alert phone is not set</string>
+    <string name="msg_secondary_number_empty">Secondary alert phone is not set</string>
 	
+    <!-- Alert -->
     <string name="alertconf_primary_num">Primary Number</string>
     <string name="alertconf_secondary_num">Secondary Number</string>
+    <string name="alertconf_alert_options">Alert Options</string>
     <string name="alertconf_call">Call</string>
     <string name="alertconf_text">Text</string>
     <string name="btn_alert">ALERT</string>
@@ -13,6 +19,12 @@
     <string name="dialog_alert_secondary">Got helped? If not, you can choose to make an alert call to the primary or secondary number</string>
     <string name="dialog_alert_primary_again">Primary</string>
     <string name="dialog_alert_secondary_again">Secondary</string>
+    <string name="dialog_add_contact_input">Input a number:</string>
+    <string name="dialog_add_contact_or">Or:</string>
+    <string name="dialog_delete_contact_title">Delete contact</string>
+    <string name="dialog_delete_contact_msg">Delete this contact?</string>
+    <string name="btn_add_contact_import">Select from contacts</string>
+    <string name="alertconf_phone_unset">(unset)</string>
     
     <!-- Contact -->
     <string name="btn_add_sign"> + </string>
@@ -20,4 +32,7 @@
     <string name="dialog_add_contact_title">Add New Contact</string>
     <string name="dialog_contact_name">Name</string>
     <string name="dialog_contact_phone">Phone</string>
+    
+    <!-- Pick from contacts -->
+    <string name="title_pick_from_contacts">Pick a phone number from contacts</string>
 </resources>

@@ -1,6 +1,7 @@
 package cis573.carecoor;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,14 +19,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import cis573.carecoor.utils.Logger;
+import cis573.carecoor.utils.MyToast;
 import cis573.carecoor.utils.PreferenceUtil;
 
 public class MainActivity extends FragmentActivity {
 	
 	public static final String TAG = "MainActivity";
 
-	private static final String[] PAGE_TITLES = {"Voice", "Contacts", "Friends", "Games", "More"}; 
-	
 	private Button mBtnAlert;
 	private ViewPager mViewPager;
 	private AlertDialog mAlertCfmDialog;
@@ -45,14 +45,17 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		Logger.i(TAG, String.format("Back from call, request=%d, result=%d", arg0, arg1));
-		mAlertSecDialog.show();
+		super.onActivityResult(arg0, arg1, arg2);
+		if(arg0 == 0 && arg1 == RESULT_OK) {
+			mAlertSecDialog.show();
+		}
 	}
 
 	private void initViews() {
 		mBtnAlert = (Button) findViewById(R.id.main_alert_btn);
 		mBtnAlert.setOnClickListener(onAlertClick);
 		mViewPager = (ViewPager) findViewById(R.id.main_pager);
-		mAdapter = new MainPagerAdapter(getSupportFragmentManager());
+		mAdapter = new MainPagerAdapter(getSupportFragmentManager(), MainActivity.this);
 		mViewPager.setAdapter(mAdapter);
 		mAlertCfmDialog = new AlertDialog.Builder(this)
 		.setTitle(R.string.dialog_alert_cfm_title)
@@ -91,11 +94,19 @@ public class MainActivity extends FragmentActivity {
 	
 	private void alertPrimary() {
 		String number = PreferenceUtil.getPrimaryAlertNumber(this);
+		if("".equals(number)) {
+			MyToast.show(MainActivity.this, R.string.msg_primary_number_empty);
+			return;
+		}
 		doAlert(number);
 	}
 	
 	private void alertSecondary() {
 		String number = PreferenceUtil.getSecondaryAlertNumber(this);
+		if("".equals(number)) {
+			MyToast.show(MainActivity.this, R.string.msg_secondary_number_empty);
+			return;
+		}
 		doAlert(number);
 	}
 	
@@ -123,9 +134,12 @@ public class MainActivity extends FragmentActivity {
 	};
 	
 	public static class MainPagerAdapter extends FragmentPagerAdapter {
+		
+		private String[] mPageTitles;
 
-		public MainPagerAdapter(FragmentManager fm) {
+		public MainPagerAdapter(FragmentManager fm, Context context) {
 			super(fm);
+			mPageTitles = context.getResources().getStringArray(R.array.main_page_titles);
 		}
 
 		@Override
@@ -136,19 +150,19 @@ public class MainActivity extends FragmentActivity {
 			} else if(arg0 == 1) {	// Contact
 				f = new ContactFragment();
 			} else {
-				f = DummyFragment.newInstance(PAGE_TITLES[arg0]);
+				f = DummyFragment.newInstance(mPageTitles[arg0]);
 			}
 			return f;
 		}
 
 		@Override
 		public int getCount() {
-			return PAGE_TITLES.length;
+			return mPageTitles.length;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return PAGE_TITLES[position];
+			return mPageTitles[position];
 		}
 	}
 	

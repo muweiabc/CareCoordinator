@@ -11,13 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import cis573.carecoor.adapter.ContactAdapter;
 import cis573.carecoor.bean.Contact;
-import cis573.carecoor.utils.FileKit;
+import cis573.carecoor.data.DataCenter;
 
 public class ContactFragment extends Fragment {
 
@@ -29,12 +31,14 @@ public class ContactFragment extends Fragment {
 	private ContactAdapter mAdapter;
 	private AlertDialog mAddContactDialog;
 	
-	private List<Contact> mUserContacts; 
+	private List<Contact> mUsefulContacts;
+	private List<Contact> mUserContacts;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mUserContacts = FileKit.readUserContacts(getActivity());
+		mUsefulContacts = DataCenter.getUsefulContacts(getActivity());
+		mUserContacts = DataCenter.getUserContacts(getActivity());
 		if(mUserContacts == null) {
 			mUserContacts = new ArrayList<Contact>();
 		}
@@ -57,8 +61,9 @@ public class ContactFragment extends Fragment {
 				return true;
 			}
 		});
+		mListView.setOnItemLongClickListener(onLongClick);
 		mAdapter = new ContactAdapter(getActivity());
-		addUsefulContacts();
+		mAdapter.setContactList1(mUsefulContacts);
 		mAdapter.setContactList2(mUserContacts);
 		mListView.setAdapter(mAdapter);
 		return view;
@@ -72,14 +77,6 @@ public class ContactFragment extends Fragment {
 		}
 	}
 	
-	private void addUsefulContacts() {
-		List<Contact> contacts = new ArrayList<Contact>();
-		contacts.add(new Contact("Penn Nursing", "215-898-5074"));
-		contacts.add(new Contact("University of Pennsylvania", "215-898-5000"));
-		mAdapter.setContactList1(contacts);
-		mAdapter.notifyDataSetChanged();
-	}
-	
 	private OnClickListener onButtonClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -89,6 +86,23 @@ public class ContactFragment extends Fragment {
 			} else if(id == R.id.contact_import_btn) {
 				
 			}
+		}
+	};
+	
+	private OnItemLongClickListener onLongClick = new OnItemLongClickListener() {
+		@Override
+		public boolean onItemLongClick(AdapterView<?> parent, View view,
+				int position, long id) {
+			long flatPosition = mListView.getExpandableListPosition(position);
+			if(ExpandableListView.getPackedPositionType(flatPosition)
+					== ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+				int groupPosition = ExpandableListView.getPackedPositionGroup(flatPosition);
+	            if(groupPosition == 1) {
+	            	int childPosition = ExpandableListView.getPackedPositionChild(flatPosition);
+	            	showDeleteContactDialog(childPosition);
+	            }
+			}
+			return true;
 		}
 	};
 	
@@ -105,7 +119,7 @@ public class ContactFragment extends Fragment {
 				String name = etName.getText().toString();
 				String phone = etPhone.getText().toString();
 				mUserContacts.add(new Contact(name, phone));
-				FileKit.saveUserContacts(getActivity(), mUserContacts);
+				DataCenter.setUserContacts(getActivity(), mUserContacts);
 				mAdapter.setContactList2(mUserContacts);
 				mAdapter.notifyDataSetChanged();
 			}
@@ -115,5 +129,25 @@ public class ContactFragment extends Fragment {
 				return;
 			}
 		}).create();
+	}
+	
+	private void showDeleteContactDialog(final int position) {
+		new AlertDialog.Builder(getActivity())
+		.setTitle(R.string.dialog_delete_contact_title)
+		.setMessage(R.string.dialog_delete_contact_msg)
+		.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				mUserContacts.remove(position);
+				DataCenter.setUserContacts(getActivity(), mUserContacts);
+				mAdapter.setContactList2(mUserContacts);
+				mAdapter.notifyDataSetChanged();
+			}
+		}).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				return;
+			}
+		}).show();
 	}
 }

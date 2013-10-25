@@ -1,29 +1,25 @@
 package cis573.carecoor.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
 
 import android.content.Context;
-import cis573.carecoor.bean.Contact;
 
 public class FileKit {
 	
 	public static final String TAG = "FileKit";
 	
-	private static final String FILENAME_USER_CONTACTS = "user_contacts";
-
-	public static void saveUserContacts(Context context, List<Contact> list) {
+	public static void saveObject(Context context, String filename, Object odj) {
 		ObjectOutputStream oos = null;
 		try {
-			FileOutputStream fos = context.openFileOutput(FILENAME_USER_CONTACTS,
+			FileOutputStream fos = context.openFileOutput(filename,
 					Context.MODE_PRIVATE);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(list);
+			oos.writeObject(odj);
 		} catch (Exception e) {
 			Logger.e(TAG, e.getMessage(), e);
 		} finally {
@@ -37,24 +33,27 @@ public class FileKit {
 		}
 	}
 	
-	public static List<Contact> readUserContacts(Context context) {
-		List<Contact> list = null;
+	public static Object readObject(Context context, String filename) {
+		Object obj = null;
 		ObjectInputStream ois = null;
-		try {
-			FileInputStream fis = context.openFileInput(FILENAME_USER_CONTACTS);
-			ois = new ObjectInputStream(fis);
-			list = (List<Contact>) ois.readObject();
-		} catch (Exception e) {
-			Logger.e(TAG, e.getMessage(), e);
-		} finally {
+		File file = context.getFileStreamPath(filename);
+		if(file != null && file.exists()) {
 			try {
-				if(ois != null) {
-					ois.close();
-				}
-			} catch (IOException e) {
+				FileInputStream fis = new FileInputStream(file);
+				ois = new ObjectInputStream(fis);
+				obj = ois.readObject();
+			} catch (Exception e) {
 				Logger.e(TAG, e.getMessage(), e);
+			} finally {
+				try {
+					if(ois != null) {
+						ois.close();
+					}
+				} catch (IOException e) {
+					Logger.e(TAG, e.getMessage(), e);
+				}
 			}
 		}
-		return list;
+		return obj;
 	}
 }

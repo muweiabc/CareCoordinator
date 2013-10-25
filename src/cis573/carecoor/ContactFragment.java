@@ -3,9 +3,14 @@ package cis573.carecoor;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +29,8 @@ import cis573.carecoor.data.DataCenter;
 public class ContactFragment extends Fragment {
 
 	public static final String TAG = "ContactFragment";
+	
+	private static final int REQUEST_IMPORT = 0;
 	
 	private Button mBtnAdd;
 	private Button mBtnImport;
@@ -77,6 +84,39 @@ public class ContactFragment extends Fragment {
 		}
 	}
 	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQUEST_IMPORT) {
+			if(resultCode == Activity.RESULT_OK && data != null) {
+				addImportedContact(data.getData());
+			}
+		}
+	}
+	
+	private void addImportedContact(Uri uri) {
+		@SuppressWarnings("deprecation")
+		Cursor c = getActivity().managedQuery(uri, null, null, null, null);
+		if (c.moveToFirst()) {
+			String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+			String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+			if("1".equals(hasPhone)) {
+				Cursor phones = getActivity().getContentResolver()
+						.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+						null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
+				phones.moveToFirst();
+				String number = phones.getString(phones
+								.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+				String name = phones.getString(phones
+								.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+				mUserContacts.add(new Contact(name, number));
+				DataCenter.setUserContacts(getActivity(), mUserContacts);
+				mAdapter.setContactList2(mUserContacts);
+				mAdapter.notifyDataSetChanged();
+			}
+		}
+	}
+
 	private OnClickListener onButtonClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -84,7 +124,9 @@ public class ContactFragment extends Fragment {
 			if(id == R.id.contact_add_btn) {
 				mAddContactDialog.show();
 			} else if(id == R.id.contact_import_btn) {
-				
+				// Pick from system contacts
+				Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+				startActivityForResult(i, REQUEST_IMPORT);
 			}
 		}
 	};

@@ -46,7 +46,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		Logger.i(TAG, String.format("Back from call, request=%d, result=%d", arg0, arg1));
 		super.onActivityResult(arg0, arg1, arg2);
-		if(arg0 == 0 && arg1 == RESULT_OK) {
+		if(arg0 == 0) {
 			mAlertSecDialog.show();
 		}
 	}

@@ -35,4 +35,7 @@
     
     <!-- Pick from contacts -->
     <string name="title_pick_from_contacts">Pick a phone number from contacts</string>
+    
+    <!-- DrugReminder -->
+    <string name="add">add</string>
 </resources>

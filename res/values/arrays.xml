@@ -3,6 +3,7 @@
     <string-array name="main_page_titles">
         <item>Alert</item>
         <item>Contacts</item>
+        <item>DrugReminder</item>
         <item>Friends</item>
         <item>Games</item>
         <item>More</item>

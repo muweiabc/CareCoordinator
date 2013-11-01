@@ -149,7 +149,10 @@ public class MainActivity extends FragmentActivity {
 				f = new AlertConfFragment();
 			} else if(arg0 == 1) {	// Contact
 				f = new ContactFragment();
-			} else {
+			} else if(arg0==2){
+				f = new DrugReminderFragment();
+			}
+			else {
 				f = DummyFragment.newInstance(mPageTitles[arg0]);
 			}
 			return f;

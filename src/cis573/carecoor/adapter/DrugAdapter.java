@@ -20,7 +20,8 @@ public class DrugAdapter extends ArrayAdapter<Drug> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		convertView.inflate(mContext, R.layout.druglistview, parent);
+		View view=View.inflate(mContext, resource, root)
+		View.inflate(mContext, R.layout., parent);
 		return convertView;
 		//return super.getView(position, convertView, parent);
 	}

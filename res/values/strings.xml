@@ -43,5 +43,8 @@
 	<string name="nextrefill">Next Refill in: 5 days</string>
 	<string name="addappt">Add Appointment</string>
 	
+	<!-- Friends -->
+    <string name="dialog_title_friends">Prompt</string>
+    <string name="dialog_friends_facebook_page">Go to %s\'s facebook page?</string>
 </resources>
 

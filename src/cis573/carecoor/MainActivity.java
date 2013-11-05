@@ -1,5 +1,6 @@
 package cis573.carecoor;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,8 +23,9 @@ import cis573.carecoor.utils.Logger;
 import cis573.carecoor.utils.MyToast;
 import cis573.carecoor.utils.PreferenceUtil;
 
-public class MainActivity extends FragmentActivity {
-	
+public class MainActivity extends FragmentActivity
+{
+	 
 	public static final String TAG = "MainActivity";
 
 	private Button mBtnAlert;
@@ -150,7 +152,7 @@ public class MainActivity extends FragmentActivity {
 			} else if(arg0 == 1) {	// Contact
 				f = new ContactFragment();
 			} else if(arg0 == 2){
-				f = new DrugReminderFragment();
+				f = new ReminderFragment();
 			} else if(arg0 == 3) {	// Friends
 				f = new FriendsFragment();
 			} else {

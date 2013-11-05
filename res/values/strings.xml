@@ -39,6 +39,9 @@
     <string name="add">Add Reminder</string>
     <string name="drugs">Drug List</string>
     <string name="title_activity_druglist">Druglist</string>
-
+	<string name="nextapp">Next Appointment in: 5 days</string>
+	<string name="nextrefill">Next Refill in: 5 days</string>
+	<string name="addappt">Add Appointment</string>
+	
 </resources>
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    <Button 
+	        android:id="@+id/addDrug"
+	        android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:text="@string/add" />
+	    
+	    <Button 
+	        android:id="@+id/showdrugs"
+	        android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:text="@string/drugs"/>
+	    <Button 
+	        android:id="@+id/addappt"
+	        android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:text="@string/addappt"/>
+	 </LinearLayout>
+	 
+    <TextView android:id="@+id/nextappt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/nextapp" />
+    <TextView android:id="@+id/nextrefill"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/nextrefill" />"
+
+</LinearLayout>

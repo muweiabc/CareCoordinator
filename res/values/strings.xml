@@ -40,5 +40,8 @@
     <string name="drugs">Drug List</string>
     <string name="title_activity_druglist">Druglist</string>
 
+    <!-- Friends -->
+    <string name="dialog_title_friends">Prompt</string>
+    <string name="dialog_friends_facebook_page">Go to %s\'s facebook page?</string>
 </resources>
 

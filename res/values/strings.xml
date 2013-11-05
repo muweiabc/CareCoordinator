@@ -2,11 +2,10 @@
 <resources>
 
     <string name="app_name">Care Coordinator</string>
-    
     <string name="msg_empty_phone_number">Phone number cannot be empty</string>
     <string name="msg_primary_number_empty">Primary alert phone is not set</string>
     <string name="msg_secondary_number_empty">Secondary alert phone is not set</string>
-	
+
     <!-- Alert -->
     <string name="alertconf_primary_num">Primary Number</string>
     <string name="alertconf_secondary_num">Secondary Number</string>
@@ -25,17 +24,21 @@
     <string name="dialog_delete_contact_msg">Delete this contact?</string>
     <string name="btn_add_contact_import">Select from contacts</string>
     <string name="alertconf_phone_unset">(unset)</string>
-    
+
     <!-- Contact -->
     <string name="btn_add_sign"> + </string>
     <string name="btn_import">Import</string>
     <string name="dialog_add_contact_title">Add New Contact</string>
     <string name="dialog_contact_name">Name</string>
     <string name="dialog_contact_phone">Phone</string>
-    
+
     <!-- Pick from contacts -->
     <string name="title_pick_from_contacts">Pick a phone number from contacts</string>
-    
+
     <!-- DrugReminder -->
-    <string name="add">add</string>
+    <string name="add">Add Reminder</string>
+    <string name="drugs">Drug List</string>
+    <string name="title_activity_druglist">Druglist</string>
+
 </resources>
+

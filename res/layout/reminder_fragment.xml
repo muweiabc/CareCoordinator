@@ -28,11 +28,9 @@
 	 
     <TextView android:id="@+id/nextappt"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="@string/nextapp" />
+        android:layout_height="40dp"/>
     <TextView android:id="@+id/nextrefill"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="@string/nextrefill" />"
+        android:layout_height="40dp" />"
 
 </LinearLayout>

@@ -2,7 +2,10 @@ package cis573.carecoor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import android.R.integer;
 import android.app.Activity;
@@ -48,6 +51,8 @@ public class ReminderFragment extends Fragment
 	private Button addApptButton;
 	private TextView nextapptTextView;
 	private TextView nextrefillTextView;
+	private Calendar nextRefillDate;
+	private Calendar nextApptDate;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -59,7 +64,8 @@ public class ReminderFragment extends Fragment
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		nextRefillDate=Calendar.getInstance();
+		nextApptDate=Calendar.getInstance();
 	}
 
 	@Override
@@ -71,6 +77,12 @@ public class ReminderFragment extends Fragment
 		addApptButton=(Button)view.findViewById(R.id.addappt);
 		nextapptTextView=(TextView)view.findViewById(R.id.nextappt);
 		nextrefillTextView=(TextView)view.findViewById(R.id.nextrefill);
+		
+		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+		String refilldate=df.format(nextRefillDate.getTime());
+		String apptdate=df.format(nextApptDate.getTime());
+		nextapptTextView.setText("Next Appointment Date is: "+refilldate);
+		nextrefillTextView.setText("Next Refill Date is: "+apptdate);
 		
 		addDrug.setOnClickListener(listener);
 		showDrugs.setOnClickListener(listener);

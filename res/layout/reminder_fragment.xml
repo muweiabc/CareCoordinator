@@ -1,36 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" >
-	    <Button 
-	        android:id="@+id/addDrug"
-	        android:layout_width="wrap_content"
-	   		android:layout_height="wrap_content"
-	   		android:text="@string/add" />
-	    
-	    <Button 
-	        android:id="@+id/showdrugs"
-	        android:layout_width="wrap_content"
-	   		android:layout_height="wrap_content"
-	   		android:text="@string/drugs"/>
-	    <Button 
-	        android:id="@+id/addappt"
-	        android:layout_width="wrap_content"
-	   		android:layout_height="wrap_content"
-	   		android:text="@string/addappt"/>
-	 </LinearLayout>
-	 
-    <TextView android:id="@+id/nextappt"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
-    <TextView android:id="@+id/nextrefill"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView_drug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="DRUGS"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView_drug_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="Drug Names:" />
+
+            <EditText
+                android:id="@+id/drug_name"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/showdrugs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drugs" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView_dose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="Dose:(/each time)" />
+
+            <Spinner
+                android:id="@+id/dose_spinner"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.93"
+                android:textSize="10pt" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        
+        <TextView
+                android:id="@+id/textView_dose_frequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="How oftern per day?" />
+
+        <RadioButton
+            android:id="@+id/dose_one_button"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="1" />
+
+        <RadioButton
+            android:id="@+id/dose_two_button"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="2" />
+        
+        <RadioButton
+            android:id="@+id/dose_three_button"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="3" />
+          
+        </LinearLayout>
+      
+        <Button
+            android:id="@+id/addDrug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp" />"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="SCHEDULE"
+            android:textColor="@android:color/white" />
+        
+        <TextView
+            android:id="@+id/nextappt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:id="@+id/nextrefill"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/addappt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addappt" />
+
+            <Button
+                android:id="@+id/deleteappt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deleteappt" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="HISTORY"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+   
 
 </LinearLayout>

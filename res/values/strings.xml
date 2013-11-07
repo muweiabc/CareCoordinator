@@ -37,7 +37,7 @@
 
     <!-- DrugReminder -->
     <string name="add">Add Reminder</string>
-    <string name="drugs">Drug List</string>
+    <string name="drugs">Add from list</string>
     <string name="title_activity_druglist">Druglist</string>
 	<string name="addappt">Add Appointment</string>
 	<string name="t1">Add Drug</string>
@@ -49,5 +49,6 @@
 	<!-- Friends -->
     <string name="dialog_title_friends">Prompt</string>
     <string name="dialog_friends_facebook_page">Go to %s\'s facebook page?</string>
+    <string name="deleteappt">Delete appointment</string>
 </resources>
 

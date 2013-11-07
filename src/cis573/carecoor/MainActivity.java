@@ -154,7 +154,7 @@ public class MainActivity extends FragmentActivity
 			} else if(arg0 == 2){
 				f = new ReminderFragment();
 			} else if(arg0 == 3) {	// Friends
-				f = new FriendsFragment();
+				f = new FriendsFragment();	
 			} else {
 				f = DummyFragment.newInstance(mPageTitles[arg0]);
 			}

@@ -13,8 +13,10 @@ public class DataCenter {
 	
 	private static final String FILENAME_USER_CONTACTS = "user_contacts";
 	private static final String FILENAME_USEFUL_CONTACTS = "useful_contacts";
+	private static final String FILENAME_DRUG_LISTS="drug_lists";
 	
 	private static List<Contact> mUsefulContacts = null;
+	private static List<Contact> mDrugs = null;
 	private static List<Contact> mUserContacts = null;
 	
 	public static List<Contact> getUsefulContacts(Context context) {
@@ -24,10 +26,24 @@ public class DataCenter {
 		return mUsefulContacts;
 	}
 	
+	public static List<Contact> getDrugLists(Context context) {
+		if(mDrugs == null) {
+			mDrugs = (List<Contact>) FileKit.readObject(context, FILENAME_DRUG_LISTS);
+		}
+		return mDrugs;
+	}
+	
 	public static void setUsefulContacts(Context context, List<Contact> contacts) {
 		if(contacts != null) {
 			mUsefulContacts = contacts;
 			FileKit.saveObject(context, FILENAME_USEFUL_CONTACTS, mUsefulContacts);
+		}
+	}
+	
+	public static void setDrugLists(Context context, List<Contact> contacts) {
+		if(contacts != null) {
+			mDrugs = contacts;
+			FileKit.saveObject(context, FILENAME_DRUG_LISTS, mDrugs);
 		}
 	}
 	

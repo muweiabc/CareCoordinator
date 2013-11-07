@@ -25,11 +25,13 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -44,7 +46,7 @@ import cis573.carecoor.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ReminderFragment extends Fragment 
+public class ReminderFragment extends Fragment implements OnItemSelectedListener
 {
 	private Button addDrug;
 	private Button showDrugs;
@@ -53,6 +55,7 @@ public class ReminderFragment extends Fragment
 	private TextView nextrefillTextView;
 	private Calendar nextRefillDate;
 	private Calendar nextApptDate;
+	private Spinner doseSpinner;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -66,17 +69,26 @@ public class ReminderFragment extends Fragment
 		super.onCreate(savedInstanceState);
 		nextRefillDate=Calendar.getInstance();
 		nextApptDate=Calendar.getInstance();
+		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.dose_array, android.R.layout.simple_spinner_item);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.reminder_fragment, container, false);
+		
 		addDrug=(Button)view.findViewById(R.id.addDrug);
 		showDrugs=(Button)view.findViewById(R.id.showdrugs);
 		addApptButton=(Button)view.findViewById(R.id.addappt);
 		nextapptTextView=(TextView)view.findViewById(R.id.nextappt);
 		nextrefillTextView=(TextView)view.findViewById(R.id.nextrefill);
+		doseSpinner=(Spinner) view.findViewById(R.id.dose_spinner);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.dose_array, android.R.layout.simple_spinner_item);
+		//ArrayAdapter <String> adap= new ArrayAdapter(this, android.R.layout.simple_spinner_item, R.array.dose_array); 
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// Apply the adapter to the spinner
+		doseSpinner.setAdapter(adapter);
 		
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 		String refilldate=df.format(nextRefillDate.getTime());
@@ -90,6 +102,8 @@ public class ReminderFragment extends Fragment
 		return view;
 	}
 	
+	
+
 	private TimePickerDialog.OnTimeSetListener cb=new  TimePickerDialog.OnTimeSetListener(){
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {		
@@ -140,6 +154,19 @@ public class ReminderFragment extends Fragment
 		//startActivityForResult(intent,0);
 		startActivity(intent);
 	}*/
+
+	@Override
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+			long arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 	

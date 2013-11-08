@@ -37,18 +37,28 @@
 
     <!-- DrugReminder -->
     <string name="add">Add Reminder</string>
-    <string name="drugs">Add from list</string>
+    <string name="drugs">Drug List</string>
     <string name="title_activity_druglist">Druglist</string>
+	<string name="nextapp">Next Appointment in: 5 days</string>
+	<string name="nextrefill">Next Refill in: 5 days</string>
 	<string name="addappt">Add Appointment</string>
-	<string name="t1">Add Drug</string>
-	<string name="tname">Name:</string>
-	<string name="tform">Form:</string>
-	<string name="tusage">Usage:</string>
-	<string name="tcontent">Content</string>
 	
 	<!-- Friends -->
     <string name="dialog_title_friends">Prompt</string>
     <string name="dialog_friends_facebook_page">Go to %s\'s facebook page?</string>
-    <string name="deleteappt">Delete appointment</string>
+    <string name="next">next</string>
+    <string name="choose">Choose From Medicine List :</string>
+    <string name="title_activity_add_reminder">Add Medicine</string>
+    <string name="title_activity_add_time">Time &amp; Days</string>
+    <string name="title_activity_add_duration">Duration</string>
+    <string name="title_activity_add_summary">Summary</string>
+    <string name="startday">Start Date :</string>
+    <string name="hour">Hours</string>
+    <string name="days">Days</string>
+    <string name="tname">name</string>
+    <string name="tform">form</string>
+    <string name="tusage">usage</string>
+    <string name="tcontent">content</string>
+    <string name="deleteappt">delete</string>
 </resources>
 

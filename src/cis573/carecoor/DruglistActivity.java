@@ -22,8 +22,9 @@ public class DruglistActivity extends Activity {
 	private ListView druglist;
 	private ArrayAdapter<Drug> adapter;
 	private ArrayList<Drug> drugs;
-	private Button addDrugButton;
+	//private Button addDrugButton;
 	private AlertDialog newdrugDialog;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,13 +32,13 @@ public class DruglistActivity extends Activity {
 		drugs=Drug.getDrugs();
 		
 		druglist=(ListView)findViewById(R.id.druginfo);
-		addDrugButton=(Button)findViewById(R.id.btnadd);
+		//addDrugButton=(Button)findViewById(R.id.btnadd);
 		
 		adapter=new ArrayAdapter<Drug>(this,android.R.layout.simple_list_item_1,drugs);
 		druglist.setAdapter(adapter);
-		addDrugButton.setOnClickListener(ls);
+		//addDrugButton.setOnClickListener(ls);
 		
-		initdialog();
+		//initdialog();
 		
 	}
 	private OnClickListener ls=new OnClickListener(){

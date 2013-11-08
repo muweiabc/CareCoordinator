@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +76,7 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.reminder_fragment, container, false);
+		View view = inflater.inflate(R.layout.fragment_reminder, container, false);
 		
 		addDrug=(Button)view.findViewById(R.id.addDrug);
 		showDrugs=(Button)view.findViewById(R.id.showdrugs);
@@ -116,6 +117,15 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
 			// TODO Auto-generated method stub
+			Calendar cal = Calendar.getInstance();              
+			Intent intent = new Intent(Intent.ACTION_EDIT);
+			intent.setType("vnd.android.cursor.item/event");
+			intent.putExtra("beginTime", cal.getTimeInMillis());
+			intent.putExtra("allDay", false);
+			intent.putExtra("rrule", "FREQ=DAILY");
+			intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+			intent.putExtra("title", "A Test Event from android app");
+			startActivity(intent);
 			
 		}
 		
@@ -131,16 +141,11 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 				startActivity(intent);
 			}else
 			if(id==R.id.addDrug){
-				/*
-				Intent intent = new Intent(DashboardScreen.this, ServiceClass.class);
-				PendingIntent pintent = PendingIntent.getService(DashboardScreen.this, 0, intent, 0);
-				AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-				alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 30*1000, pintent);*/
+				Intent intent=new Intent(getActivity(), AddReminderActivity.class);
+				//startActivityForResult(intent,0);
+				startActivity(intent);
 				
-				TimePickerDialog pick=new TimePickerDialog(getActivity(),cb,1,2,true);
-				pick.show();
-				AlarmManager manager=(AlarmManager) getActivity().getSystemService(getActivity().ALARM_SERVICE);
-				manager.set(AlarmManager.RTC, 10000, null);
+				
 			}else 
 			if(id==R.id.addappt){
 				DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(),cb2,1,1,1);

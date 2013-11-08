@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+<!--  
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,13 +101,19 @@
             android:text="3" />
           
         </LinearLayout>
+      -->
       
+       <Button
+                android:id="@+id/showdrugs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drugs" />
         <Button
             android:id="@+id/addDrug"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add" />
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,7 +127,7 @@
             android:background="@android:color/darker_gray"
             android:paddingBottom="4dp"
             android:paddingTop="4dp"
-            android:text="SCHEDULE"
+            android:text="@string/schedule"
             android:textColor="@android:color/white" />
         
         <TextView
@@ -166,7 +172,7 @@
             android:background="@android:color/darker_gray"
             android:paddingBottom="4dp"
             android:paddingTop="4dp"
-            android:text="HISTORY"
+            android:text="@string/history"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

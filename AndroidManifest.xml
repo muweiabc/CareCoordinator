@@ -35,6 +35,22 @@
             android:name="cis573.carecoor.DruglistActivity"
             android:label="@string/title_activity_druglist" >
         </activity>
+        <activity
+            android:name="cis573.carecoor.AddReminderActivity"
+            android:label="@string/title_activity_add_reminder" >
+        </activity>
+        <activity
+            android:name="cis573.carecoor.AddDurationActivity"
+            android:label="@string/title_activity_add_duration" >
+        </activity>
+        <activity
+            android:name="cis573.carecoor.AddTimeActivity"
+            android:label="@string/title_activity_add_time" >
+        </activity>
+        <activity
+            android:name="cis573.carecoor.AddSummaryActivity"
+            android:label="@string/title_activity_add_summary" >
+        </activity>
     </application>
 
 </manifest>

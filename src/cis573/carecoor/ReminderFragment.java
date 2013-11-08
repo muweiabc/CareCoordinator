@@ -83,13 +83,13 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		addApptButton=(Button)view.findViewById(R.id.addappt);
 		nextapptTextView=(TextView)view.findViewById(R.id.nextappt);
 		nextrefillTextView=(TextView)view.findViewById(R.id.nextrefill);
-		doseSpinner=(Spinner) view.findViewById(R.id.dose_spinner);
+		//doseSpinner=(Spinner) view.findViewById(R.id.dose_spinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.dose_array, android.R.layout.simple_spinner_item);
 		//ArrayAdapter <String> adap= new ArrayAdapter(this, android.R.layout.simple_spinner_item, R.array.dose_array); 
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
-		doseSpinner.setAdapter(adapter);
+		//doseSpinner.setAdapter(adapter);
 		
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 		String refilldate=df.format(nextRefillDate.getTime());

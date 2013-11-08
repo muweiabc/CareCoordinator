@@ -8,14 +8,14 @@ import android.view.View;
 import android.widget.Button;
 
 public class AddTimeActivity extends Activity {
-	
+
 	private Button nextButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_time);
-		nextButton=(Button)findViewById(R.id.next);
+		nextButton=(Button)findViewById(R.id.next3);
 	}
 
 	@Override
@@ -24,12 +24,9 @@ public class AddTimeActivity extends Activity {
 		getMenuInflater().inflate(R.menu.add_time, menu);
 		return true;
 	}
-	
+
 	public void f(View v){
 		Intent intent=new Intent(this,AddSummaryActivity.class);
 		startActivity(intent);
 	}
-
 }
-
-

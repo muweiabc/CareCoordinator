@@ -3,6 +3,7 @@ package cis573.carecoor;
 import java.util.Calendar;
 
 import android.os.Bundle;
+import android.R.integer;
 import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import android.widget.Button;
 public class AddReminderActivity extends Activity {
 	
 	private Button nextButton;
+	private Button chooseButton;
+	
 	private OnClickListener listener=new OnClickListener(){
 
 		@Override
@@ -31,11 +34,19 @@ public class AddReminderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_reminder);
 		nextButton=(Button)findViewById(R.id.next);
+		chooseButton=(Button)findViewById(R.id.choose);
 		//nextButton.setOnClickListener(listener);
 	}
 	public void f(View v){
-		Intent intent=new Intent(this,AddDurationActivity.class);
-		startActivity(intent);
+		int id=v.getId();
+		if(id==R.id.choose){
+			Intent intent=new Intent(this,DruglistActivity.class);
+			startActivity(intent);
+		}else
+		if(id==R.id.next){
+			Intent intent=new Intent(this,AddDurationActivity.class);
+			startActivity(intent);
+		}
 	}
 	/*
 	Intent intent = new Intent(DashboardScreen.this, ServiceClass.class);

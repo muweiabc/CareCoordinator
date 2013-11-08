@@ -8,13 +8,14 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/choose" />
 
     <Button
-        android:id="@+id/next2"
+        android:id="@+id/choose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/choose" />
+        android:text="@string/choose"
+        android:onClick="f" />
 
     <Button
         android:id="@+id/next"

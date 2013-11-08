@@ -36,16 +36,17 @@
     <string name="title_pick_from_contacts">Pick a phone number from contacts</string>
 
     <!-- DrugReminder -->
-    <string name="add">Add Reminder</string>
+    <string name="add">+</string>
     <string name="drugs">Drug List</string>
     <string name="title_activity_druglist">Druglist</string>
-	<string name="nextapp">Next Appointment in: 5 days</string>
-	<string name="nextrefill">Next Refill in: 5 days</string>
-	<string name="addappt">Add Appointment</string>
-	
-	<!-- Friends -->
+    <string name="nextapp">Next Appointment in: 5 days</string>
+    <string name="nextrefill">Next Refill in: 5 days</string>
+    <string name="addappt">Add Appointment</string>
+
+    <!-- Friends -->
     <string name="dialog_title_friends">Prompt</string>
     <string name="dialog_friends_facebook_page">Go to %s\'s facebook page?</string>
+    
     <string name="next">next</string>
     <string name="choose">Choose From Medicine List :</string>
     <string name="title_activity_add_reminder">Add Medicine</string>
@@ -60,5 +61,12 @@
     <string name="tusage">usage</string>
     <string name="tcontent">content</string>
     <string name="deleteappt">delete</string>
-</resources>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="medicine">Medicine</string>
+    <string name="confirm">Confirm</string>
+    <string name="Duration">duration</string>
+    <string name="schedule">SCHEDULE</string>
+    <string name="history">HISTORY</string>
 
+</resources>

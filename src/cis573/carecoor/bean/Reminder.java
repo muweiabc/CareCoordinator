@@ -3,9 +3,10 @@ package cis573.carecoor.bean;
 import android.R.integer;
 
 public class Reminder {
-	private String medicine=null;
-	private String timeString=null;
+	
+	private String medicine=null;	
 	private String duration=null;
+	private String timeString=null;
 	
 	public String getMedicine() {
 		return medicine;

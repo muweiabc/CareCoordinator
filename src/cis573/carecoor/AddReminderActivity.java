@@ -33,6 +33,7 @@ public class AddReminderActivity extends Activity {
 		backButton=(Button)findViewById(R.id.back_reminder);
 		backButton.setOnClickListener(listener);
 		nextButton.setOnClickListener(listener);	
+		chooseButton.setOnClickListener(listener);
 	}
 
 	private OnClickListener listener=new OnClickListener(){
@@ -40,17 +41,17 @@ public class AddReminderActivity extends Activity {
 		public void onClick(View v) {
 			int id=v.getId();
 			if(id==R.id.choose){
-				//Intent intent=new Intent(action1);
 				Intent intent=new Intent(AddReminderActivity.this,DruglistActivity.class);
 				startActivityForResult(intent, 2);
 			}else
 			if(id==R.id.next_reminder){
 				Intent intent=new Intent(AddReminderActivity.this,AddDurationActivity.class);
+				intent.putExtra("medicine", medicine);
 				startActivityForResult(intent,code1);
 			}
 			if(id==R.id.back_reminder){
-				Intent intent=new Intent();
-				setResult(RESULT_CANCELED,intent);
+				
+				setResult(RESULT_CANCELED);
 				finish();
 			}
 		}		

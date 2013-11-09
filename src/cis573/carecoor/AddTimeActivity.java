@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 
 public class AddTimeActivity extends Activity {
 
+	private Intent receivedIntent;
+	
 	private Button nextButton;
 	private Button backButton;
 	private CheckBox[] hourbox=new CheckBox[24];
@@ -21,7 +23,10 @@ public class AddTimeActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
+		receivedIntent=getIntent();
+		
 		setContentView(R.layout.activity_add_time);
 		nextButton=(Button)findViewById(R.id.next_time);
 		backButton=(Button)findViewById(R.id.back_time);
@@ -48,11 +53,15 @@ public class AddTimeActivity extends Activity {
 			int id=v.getId();
 			if(id==R.id.next_time){
 				Intent intent=new Intent(AddTimeActivity.this,AddSummaryActivity.class);
+				String medicine=receivedIntent.getStringExtra("medicine");
+				int duration=receivedIntent.getIntExtra("duration",0);
+				intent.putExtra("medicine", medicine);
+				intent.putExtra("duration", duration);
 				startActivityForResult(intent, 1);
 			}
 			else if(id==R.id.back_time){
-				Intent intent=new Intent();
-				setResult(RESULT_CANCELED,intent);
+				
+				setResult(RESULT_CANCELED);
 				finish();
 			}
 		}

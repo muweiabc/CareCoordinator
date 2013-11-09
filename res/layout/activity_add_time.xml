@@ -9,7 +9,7 @@
     tools:context=".AddTimeActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/summary1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,11 +19,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/summary3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/next_time"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/summary1"
         android:layout_marginBottom="90dp"
         android:text="@string/days"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -42,8 +42,8 @@
         android:id="@+id/back_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/summary3"
+        android:layout_below="@+id/summary3"
         android:layout_marginLeft="23dp"
         android:text="@string/back" />
 
@@ -51,7 +51,7 @@
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView1"
+        android:layout_alignTop="@+id/summary1"
         android:layout_toRightOf="@+id/back_time"
         android:text="CheckBox" />
 

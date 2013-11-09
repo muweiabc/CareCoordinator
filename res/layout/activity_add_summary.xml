@@ -9,7 +9,7 @@
     tools:context=".AddSummaryActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/summary1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,21 +19,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="64dp"
-        android:text="@string/hour"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/summary4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/summary3"
         android:layout_marginTop="63dp"
         android:text="@string/days"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -42,10 +32,10 @@
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/summary4"
         android:layout_marginLeft="66dp"
         android:layout_marginTop="72dp"
-        android:layout_toRightOf="@+id/textView2"
+        android:layout_toRightOf="@+id/summary3"
         android:text="@string/confirm" />
 
     <Button
@@ -53,7 +43,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/confirm"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignLeft="@+id/summary3"
         android:text="@string/back" />
+
+    <TextView
+        android:id="@+id/summary3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/summary4"
+        android:layout_below="@+id/summary1"
+        android:layout_marginTop="99dp"
+        android:text="@string/hour"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/summary2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/summary1"
+        android:layout_marginTop="34dp"
+        android:text="@string/Duration"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

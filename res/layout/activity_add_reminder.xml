@@ -17,14 +17,13 @@
         android:id="@+id/choose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignRight="@+id/summary1"
+        android:layout_below="@+id/summary1"
         android:layout_marginTop="42dp"
-        android:onClick="f"
         android:text="@string/choose" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/summary1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

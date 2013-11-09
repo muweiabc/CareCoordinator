@@ -14,6 +14,7 @@ public class AddDurationActivity extends Activity {
 	private Button nextButton;
 	private Button backButton;
 	private int duration=3;
+	private Intent receivedIntent;
 	
 	private final int code1=1;
 	
@@ -21,6 +22,8 @@ public class AddDurationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_duration);
+		receivedIntent=getIntent();
+		
 		nextButton=(Button)findViewById(R.id.next_duration);
 		backButton=(Button)findViewById(R.id.back_duration);
 		nextButton.setOnClickListener(listener);
@@ -42,11 +45,14 @@ public class AddDurationActivity extends Activity {
 			int id=v.getId();
 			if(id==R.id.next_duration){
 				Intent intent=new Intent(AddDurationActivity.this,AddTimeActivity.class);
+				String medicine=receivedIntent.getStringExtra("medicine");
+				intent.putExtra("medicine", medicine);
+				intent.putExtra("duration", duration);
 				startActivityForResult(intent,code1);
 			}else
 			if(id==R.id.back_duration){
-				Intent intent=new Intent();
-				setResult(RESULT_CANCELED,intent);
+				
+				setResult(RESULT_CANCELED);
 				finish();
 			}
 		}

@@ -36,7 +36,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import cis573.carecoor.bean.Reminder;
 import cis573.carecoor.dummy.DummyContent;
+import cis573.carecoor.utils.Const;
 
 /**
  * A fragment representing a list of Items.
@@ -49,7 +51,10 @@ import cis573.carecoor.dummy.DummyContent;
  */
 public class ReminderFragment extends Fragment implements OnItemSelectedListener
 {
-	private Button addDrug;
+	private final int code1=1;
+	private final int code2=2;
+	
+	private Button addReminder;
 	private Button showDrugs;
 	private Button addApptButton;
 	private TextView nextapptTextView;
@@ -57,7 +62,8 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 	private Calendar nextRefillDate;
 	private Calendar nextApptDate;
 	private Spinner doseSpinner;
-	
+
+	private ArrayList<Reminder> reminders;
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -78,7 +84,7 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_reminder, container, false);
 		
-		addDrug=(Button)view.findViewById(R.id.addDrug);
+		addReminder=(Button)view.findViewById(R.id.addReminder);
 		showDrugs=(Button)view.findViewById(R.id.showdrugs);
 		addApptButton=(Button)view.findViewById(R.id.addappt);
 		nextapptTextView=(TextView)view.findViewById(R.id.nextappt);
@@ -97,7 +103,7 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		nextapptTextView.setText("Next Appointment Date is: "+refilldate);
 		nextrefillTextView.setText("Next Refill Date is: "+apptdate);
 		
-		addDrug.setOnClickListener(listener);
+		addReminder.setOnClickListener(listener);
 		showDrugs.setOnClickListener(listener);
 		addApptButton.setOnClickListener(listener);
 		return view;
@@ -135,30 +141,32 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		@Override
 		public void onClick(View v) {
 			int id=v.getId();
+			if(id==R.id.addReminder){
+				Intent intent=new Intent(getActivity(), AddReminderActivity.class);
+				startActivityForResult(intent,code1);				
+			}else
 			if(id==R.id.showdrugs){
 				Intent intent=new Intent(getActivity(), DruglistActivity.class);
-				//startActivityForResult(intent,0);
-				startActivity(intent);
+				startActivityForResult(intent,code2);
 			}else
-			if(id==R.id.addDrug){
-				Intent intent=new Intent(getActivity(), AddReminderActivity.class);
-				//startActivityForResult(intent,0);
-				startActivity(intent);
-				
-				
-			}else 
 			if(id==R.id.addappt){
 				DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(),cb2,1,1,1);
 				datePickerDialog.show();
 			}
 		}
 	};
-	/*
-	public void display(View view){
-		Intent intent=new Intent(getActivity(), DruglistActivity.class);
-		//startActivityForResult(intent,0);
-		startActivity(intent);
-	}*/
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		if(requestCode==code1){
+			if(resultCode==Activity.RESULT_OK){
+				
+			}
+		}else 
+		if(requestCode==code2){
+			
+		}
+	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
@@ -172,6 +180,10 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
 }
+
 
 	

@@ -108,12 +108,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/drugs" />
-        <Button
-            android:id="@+id/addDrug"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add" />
 
+       <Button
+           android:id="@+id/addReminder"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/add" />
 
     <LinearLayout
         android:layout_width="match_parent"

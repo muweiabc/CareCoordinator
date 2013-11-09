@@ -18,16 +18,6 @@
         android:text="@string/Duration"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="14dp"
-        android:text="@string/next" 
-        android:onClick="f" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -37,5 +27,23 @@
         android:layout_marginTop="40dp"
         android:text="@string/startday"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/next_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="79dp"
+        android:text="@string/next" />
+
+    <Button
+        android:id="@+id/back_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/next_duration"
+        android:layout_alignBottom="@+id/next_duration"
+        android:layout_alignRight="@+id/textView2"
+        android:text="@string/back" />
 
 </RelativeLayout>

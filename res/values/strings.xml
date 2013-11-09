@@ -68,5 +68,8 @@
     <string name="Duration">duration</string>
     <string name="schedule">SCHEDULE</string>
     <string name="history">HISTORY</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
 
 </resources>

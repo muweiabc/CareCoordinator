@@ -56,14 +56,15 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 	
 	private Button addReminder;
 	private Button showDrugs;
-	private Button addApptButton;
-	private TextView nextapptTextView;
-	private TextView nextrefillTextView;
+	
+	private TextView a;
+/*
 	private Calendar nextRefillDate;
 	private Calendar nextApptDate;
 	private Spinner doseSpinner;
 
-	private ArrayList<Reminder> reminders;
+	private ArrayList<Reminder> reminders;*/
+
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -74,8 +75,8 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nextRefillDate=Calendar.getInstance();
-		nextApptDate=Calendar.getInstance();
+		//nextRefillDate=Calendar.getInstance();
+		//nextApptDate=Calendar.getInstance();
 		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.dose_array, android.R.layout.simple_spinner_item);
 	}
 
@@ -86,9 +87,9 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		
 		addReminder=(Button)view.findViewById(R.id.addReminder);
 		showDrugs=(Button)view.findViewById(R.id.showdrugs);
-		addApptButton=(Button)view.findViewById(R.id.addappt);
-		nextapptTextView=(TextView)view.findViewById(R.id.nextappt);
-		nextrefillTextView=(TextView)view.findViewById(R.id.nextrefill);
+		//addApptButton=(Button)view.findViewById(R.id.addappt);
+		a=(TextView)view.findViewById(R.id.reminders);
+		
 		//doseSpinner=(Spinner) view.findViewById(R.id.dose_spinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.dose_array, android.R.layout.simple_spinner_item);
 		//ArrayAdapter <String> adap= new ArrayAdapter(this, android.R.layout.simple_spinner_item, R.array.dose_array); 
@@ -96,16 +97,16 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		//doseSpinner.setAdapter(adapter);
-		
+		/*
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 		String refilldate=df.format(nextRefillDate.getTime());
 		String apptdate=df.format(nextApptDate.getTime());
-		nextapptTextView.setText("Next Appointment Date is: "+refilldate);
-		nextrefillTextView.setText("Next Refill Date is: "+apptdate);
-		
+		//nextapptTextView.setText("Next Appointment Date is: "+refilldate);
+		//nextrefillTextView.setText("Next Refill Date is: "+apptdate);
+		*/
 		addReminder.setOnClickListener(listener);
 		showDrugs.setOnClickListener(listener);
-		addApptButton.setOnClickListener(listener);
+		//addApptButton.setOnClickListener(listener);
 		return view;
 	}
 	
@@ -148,10 +149,6 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 			if(id==R.id.showdrugs){
 				Intent intent=new Intent(getActivity(), DruglistActivity.class);
 				startActivityForResult(intent,code2);
-			}else
-			if(id==R.id.addappt){
-				DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(),cb2,1,1,1);
-				datePickerDialog.show();
 			}
 		}
 	};
@@ -161,6 +158,11 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		if(requestCode==code1){
 			if(resultCode==Activity.RESULT_OK){
 				
+				String medicine=data.getStringExtra("medicine");
+				Integer duration=data.getIntExtra("duration", 0);
+				int[] hours=data.getIntArrayExtra("hours");
+				String text=new String(medicine+"\nduration:"+duration.toString());
+				a.setText(text);
 			}
 		}else 
 		if(requestCode==code2){
@@ -180,9 +182,7 @@ public class ReminderFragment extends Fragment implements OnItemSelectedListener
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	
+
 }
 
 

@@ -47,4 +47,12 @@
         android:layout_marginLeft="23dp"
         android:text="@string/back" />
 
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_toRightOf="@+id/back_time"
+        android:text="CheckBox" />
+
 </RelativeLayout>

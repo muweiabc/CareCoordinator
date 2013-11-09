@@ -16,6 +16,7 @@ public class AddSummaryActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_summary);
 		confirmButton=(Button)findViewById(R.id.confirm);
@@ -37,17 +38,16 @@ public class AddSummaryActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			int id=v.getId();
-			if(id==R.id.confirm){
-				Intent result=new Intent();
-				setResult(RESULT_OK,result);
+			Intent intent=new Intent();
+
+			if(id==R.id.confirm){			
+				setResult(RESULT_OK,intent);
 				finish();
 			}else
 			if(id==R.id.back_summary){
-				setResult(RESULT_CANCELED);
+				setResult(RESULT_CANCELED,intent);
 				finish();
 			}
 		}
 	};
-
-
 }

@@ -13,6 +13,7 @@ public class AddDurationActivity extends Activity {
 
 	private Button nextButton;
 	private Button backButton;
+	private int duration=3;
 	
 	private final int code1=1;
 	
@@ -44,7 +45,8 @@ public class AddDurationActivity extends Activity {
 				startActivityForResult(intent,code1);
 			}else
 			if(id==R.id.back_duration){
-				setResult(RESULT_CANCELED);
+				Intent intent=new Intent();
+				setResult(RESULT_CANCELED,intent);
 				finish();
 			}
 		}
@@ -56,8 +58,8 @@ public class AddDurationActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 // A contact was picked.  Here we will just display it
                 // to the user.
-            	Intent result=new Intent();
-                setResult(RESULT_OK,result);
+            	data.putExtra("duration", duration);
+                setResult(RESULT_OK,data);
                 finish();
             }
         }

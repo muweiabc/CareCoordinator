@@ -20,6 +20,7 @@ public class AddReminderActivity extends Activity {
 	private Button nextButton;
 	private Button chooseButton;
 	private Button backButton;
+	private String medicine="amoxilin";
 	private final int code1=1; 
 	private Reminder newReminder;
 	
@@ -48,8 +49,8 @@ public class AddReminderActivity extends Activity {
 				startActivityForResult(intent,code1);
 			}
 			if(id==R.id.back_reminder){
-				//Intent intent=new Intent();
-				setResult(RESULT_CANCELED);
+				Intent intent=new Intent();
+				setResult(RESULT_CANCELED,intent);
 				finish();
 			}
 		}		
@@ -61,9 +62,8 @@ public class AddReminderActivity extends Activity {
              if (resultCode == RESULT_OK) {
                  // A contact was picked.  Here we will just display it
                  // to the user.
-                 
-                 Intent result =new Intent();
-                 setResult(RESULT_OK,result);
+                 data.putExtra("medicine", medicine);
+                 setResult(RESULT_OK,data);
                  finish();
              }
          }         

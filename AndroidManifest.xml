@@ -35,6 +35,7 @@
             android:name="cis573.carecoor.DruglistActivity"
             android:label="@string/title_activity_druglist" >
         </activity>
+        <activity android:screenOrientation="portrait" android:name="ChooseMedActivity"/>
     </application>
 
 </manifest>

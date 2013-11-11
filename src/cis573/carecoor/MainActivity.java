@@ -1,6 +1,5 @@
 package cis573.carecoor;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -152,7 +151,7 @@ public class MainActivity extends FragmentActivity
 			} else if(arg0 == 1) {	// Contact
 				f = new ContactFragment();
 			} else if(arg0 == 2){
-				f = new ReminderFragment();
+				f = new ReminderFragment2();
 			} else if(arg0 == 3) {	// Friends
 				f = new FriendsFragment();	
 			} else {

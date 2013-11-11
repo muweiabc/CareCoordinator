@@ -50,5 +50,10 @@
     <string name="dialog_title_friends">Prompt</string>
     <string name="dialog_friends_facebook_page">Go to %s\'s facebook page?</string>
     <string name="deleteappt">Delete appointment</string>
+    
+    <!-- Medicine Schedule -->
+    <string name="medschedule_empty">No medicines are scheduled</string>
+    <string name="medschedule_add">New Schedule</string>
+    <string name="medschedule_choose_med_title">Choose your medicine</string>
 </resources>
 

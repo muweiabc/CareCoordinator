@@ -8,6 +8,7 @@ import java.util.Scanner;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,11 +20,13 @@ import android.widget.ListView;
 import cis573.carecoor.bean.*;
 
 public class DruglistActivity extends Activity {
+	
 	private ListView druglist;
 	private ArrayAdapter<Drug> adapter;
 	private ArrayList<Drug> drugs;
 	private Button addDrugButton;
 	private AlertDialog newdrugDialog;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,26 +34,28 @@ public class DruglistActivity extends Activity {
 		drugs=Drug.getDrugs();
 		
 		druglist=(ListView)findViewById(R.id.druginfo);
-		addDrugButton=(Button)findViewById(R.id.btnadd);
+		addDrugButton=(Button)findViewById(R.id.set);
 		
 		adapter=new ArrayAdapter<Drug>(this,android.R.layout.simple_list_item_1,drugs);
 		druglist.setAdapter(adapter);
+			
 		addDrugButton.setOnClickListener(ls);
 		
-		initdialog();
-		
+		//initdialog();		
 	}
+	
 	private OnClickListener ls=new OnClickListener(){
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			newdrugDialog.show();
-			
-		}
-		
+			Intent returnResult=new Intent();
+			returnResult.putExtra("key1", "mememe");
+			setResult(RESULT_OK, returnResult);
+			finish();			
+		}		
 	};
 	
+	/*
 	private void initdialog(){
 		View view=View.inflate(this,R.layout.dialog_add_drug, null);
 		EditText nameEditText=(EditText)view.findViewById(R.id.drug_name_edittext);
@@ -60,7 +65,7 @@ public class DruglistActivity extends Activity {
 		newdrugDialog=new AlertDialog.Builder(this).setTitle("Add new drug")
 				.setView(view).create();
 				//setPositiveButton(text, listener)
-	}
+	}*/
 }
 
 

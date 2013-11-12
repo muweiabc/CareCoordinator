@@ -83,6 +83,20 @@
     <string name="set_schedule_take_time">Take Time</string>
     <string name="set_schedule_take_time_hint">Pick the time in a day that you want to take medicine</string>
     <string name="set_schedule_take_time_suggest">This medicine suggests you take %d time(s) a day</string>
+    <string name="set_schedule_take_days_everyday">This medicine suggests you take every day</string>
+    <string name="set_schedule_take_days_week">This medicine suggests you take %d time(s) a week</string>
+    <string name="set_schedule_duration_sugg_continuous">This medicine suggests you take continuously</string>
+    <string name="set_schedule_duration_sugg_days">This medicine suggests you take for %d days</string>
     <string name="set_schedule_day_interval">Day Interval</string>
     <string name="set_schedule_duration">Duration</string>
+    <string name="set_schedule_every_day">Every day</string>
+    <string name="set_schedule_pick_days">Pick days</string>
+    <string name="set_schedule_continuous">Continuous</string>
+    <string name="set_schedule_pick_days">Pick days</string>
+    <string name="set_schedule_continuous">Coutinuous</string>
+    <string name="set_schedule_setduration">Set duration</string>
+    
+    <string name="dialog_title_error">Error</string>
+    <string name="msg_no_take_hours">Please select at least 1 take time</string>
+    <string name="msg_no_take_days">Please select at least 1 take day</string>
 </resources>

@@ -5,7 +5,7 @@
 	"capacity": "90 tablets per bottle",
 	"dose": 1,
 	"times": 1,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 },
 {
@@ -15,7 +15,7 @@
 	"capacity": "180 tablets per bottle",
 	"dose": 1,
 	"times": 2,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 },
 {
@@ -25,7 +25,7 @@
 	"capacity": "30 capsules per bottle",
 	"dose": 1,
 	"times": 3,
-	"interval": 1,
+	"interval": 0,
 	"duration": 10
 },
 {
@@ -35,7 +35,7 @@
 	"capacity": "90 capsules per bottle",
 	"dose": 1,
 	"times": 1,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 },
 {
@@ -45,7 +45,7 @@
 	"capacity": "30 tablets per bottle",
 	"dose": 1,
 	"times": 1,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 },
 {
@@ -55,7 +55,7 @@
 	"capacity": "30 tablets per bottle",
 	"dose": 1,
 	"times": 1,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 },
 {
@@ -65,7 +65,7 @@
 	"capacity": "16 capsules per bottle",
 	"dose": 2,
 	"times": 1,
-	"interval": 3,
+	"interval": 2,
 	"duration": 0
 },
 {
@@ -75,7 +75,7 @@
 	"capacity": "30 capsules per bottle",
 	"dose": 1,
 	"times": 1,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 },
 {
@@ -85,7 +85,7 @@
 	"capacity": "90 tablets per bottle",
 	"dose": 1,
 	"times": 3,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 },
 {
@@ -95,6 +95,6 @@
 	"capacity": "60 tablets per bottle",
 	"dose": 2,
 	"times": 1,
-	"interval": 1,
+	"interval": 0,
 	"duration": 0
 }]

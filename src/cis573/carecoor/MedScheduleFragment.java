@@ -1,5 +1,6 @@
 package cis573.carecoor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,9 +11,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ReminderFragment2 extends Fragment {
+public class MedScheduleFragment extends Fragment {
 
-	public static final String TAG = "ReminderFragment2";
+	public static final String TAG = "MedScheduleFragment";
+	
+	private static final int REQUEST_NEW_SCHEDULE = 0;
 
 	private Button mBtnNew;
 	private ListView mLvSchedules;
@@ -32,7 +35,8 @@ public class ReminderFragment2 extends Fragment {
 	private OnClickListener onNewClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			
+			Intent intent = new Intent(getActivity(), ChooseMedActivity.class);
+			startActivityForResult(intent, REQUEST_NEW_SCHEDULE);
 		}
 	};
 }

@@ -52,6 +52,7 @@
             android:name="cis573.carecoor.AddSummaryActivity"
             android:label="@string/title_activity_add_summary" >
         </activity>
+        <activity android:name="SetScheduleActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

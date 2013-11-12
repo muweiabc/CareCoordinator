@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Application;
 import cis573.carecoor.bean.Contact;
 import cis573.carecoor.data.DataCenter;
+import cis573.carecoor.data.MedicineCenter;
 
 public class CoorApplication extends Application {
 
@@ -15,7 +16,6 @@ public class CoorApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		initUsefulContacts();
-		
 	}
 	
 	private void initUsefulContacts() {

@@ -151,7 +151,7 @@ public class MainActivity extends FragmentActivity
 			} else if(arg0 == 1) {	// Contact
 				f = new ContactFragment();
 			} else if(arg0 == 2){
-				f = new ReminderFragment2();
+				f = new MedScheduleFragment();
 			} else if(arg0 == 3) {	// Friends
 				f = new FriendsFragment();	
 			} else {

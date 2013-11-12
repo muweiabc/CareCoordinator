@@ -8,4 +8,5 @@ public class Const {
 	public static final String PREF_ALERT_TEXT = "alert_text";
 	
 	public static final String EXTRA_CONTACT = "cis573.carecoor.contact";
+	public static final String EXTRA_MEDICINE = "cis573.carecoor.medicine";
 }

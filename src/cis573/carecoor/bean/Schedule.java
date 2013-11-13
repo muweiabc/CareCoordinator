@@ -14,7 +14,6 @@ public class Schedule implements Serializable {
 	private List<Integer> days;
 	private int duration;
 	
-	
 	public Medicine getMedicine() {
 		return medicine;
 	}

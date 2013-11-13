@@ -99,4 +99,7 @@
     <string name="dialog_title_error">Error</string>
     <string name="msg_no_take_hours">Please select at least 1 take time</string>
     <string name="msg_no_take_days">Please select at least 1 take day</string>
+    
+    <string name="dialog_title_remove_schedule">Remove Schedule</string>
+    <string name="msg_remove_schedule">Remove this schedule?</string>
 </resources>

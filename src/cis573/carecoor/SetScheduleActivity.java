@@ -23,6 +23,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import cis573.carecoor.bean.Medicine;
+import cis573.carecoor.bean.Schedule;
+import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.utils.Const;
 
@@ -241,7 +243,6 @@ public class SetScheduleActivity extends Activity {
 		
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			
 		}
 		
 		@Override
@@ -278,6 +279,25 @@ public class SetScheduleActivity extends Activity {
 			showErrorDialog(getString(R.string.msg_no_take_days));
 			return;
 		}
+		
+		Schedule schedule = new Schedule();
+		schedule.setMedicine(mMedicine);
+		schedule.setHours(mTakeTimes);
+		if(mRgDayIntv.getCheckedRadioButtonId() == R.id.set_schedule_every_day) {
+			schedule.setDays(null);
+		} else if(mRgDayIntv.getCheckedRadioButtonId() == R.id.set_schedule_pick_days) {
+			schedule.setDays(mTakeDays);
+		}
+		if(mRgDuration.getCheckedRadioButtonId() == R.id.set_schedule_continuous) {
+			schedule.setDuration(0);
+		} else if(mRgDuration.getCheckedRadioButtonId() == R.id.set_schedule_setduration) {
+			schedule.setDuration(Integer.parseInt(mEtDuration.getText().toString()));
+		}
+		
+		DataCenter.addSchedule(SetScheduleActivity.this, schedule);
+		
+		setResult(RESULT_OK);
+		finish();
 	}
 	
 	private void showErrorDialog(String msg) {

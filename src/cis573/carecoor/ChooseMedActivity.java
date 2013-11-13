@@ -32,6 +32,15 @@ public class ChooseMedActivity extends Activity {
 		initViews();
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK) {	// Back from set schedule
+			setResult(RESULT_OK);
+			finish();
+		}
+	}
+
 	private void initViews() {
 		mLvMedicines = (ListView) findViewById(R.id.choose_med_list);
 		mLvMedicines.setOnItemClickListener(onItemClick);

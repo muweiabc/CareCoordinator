@@ -2,7 +2,7 @@
 <resources>
     <color name="blue_title_bar">#33b5e5</color>
     <color name="gray_text">#888888</color>
-    <color name="green_text">#11e238</color>
+    <color name="green_text">#00b050</color>
     <color name="orange_text">#fbaf5d</color>
 	<color name="orange_light_text">#f06d36</color>
 </resources>

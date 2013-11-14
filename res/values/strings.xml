@@ -100,11 +100,29 @@
     <string name="msg_no_take_hours">Please select at least 1 take time</string>
     <string name="msg_no_take_days">Please select at least 1 take day</string>
     
-    <string name="dialog_title_remove_schedule">Remove Schedule</string>
+    <string name="dialog_title_remove_schedule">Remove</string>
     <string name="msg_remove_schedule">Remove this schedule?</string>
     
     <string name="schedule_state_no_today">No schedule today</string>
     <string name="schedule_state_ended">Schedule ended</string>
     <string name="schedule_state_next">&lt;font color=\"#f06d36\">Next time to take: %s&lt;/font></string>
-    <string name="schedule_state_finished">&lt;font color=\"#11e238\">Today\'s schedule finished&lt;/font></string>
+    <string name="schedule_state_finished">&lt;font color=\"#00b050\">Today\'s schedule finished&lt;/font></string>
+    
+    <!-- Take medicine -->
+    <string name="take_medicine_title">Take medicine</string>
+    <string name="take_medicine_schedule_info">Schedule Info</string>
+    <string name="take_medicine_created_at">Created at: %s</string>
+    <string name="take_medicine_hours_to_take">Hours to take: %s</string>
+    <string name="take_medicine_days_to_take">Days to take: %s</string>
+    <string name="take_medicine_duration">Duration: %s</string>
+    <string name="take_medicine_schedule_status">Schedule Status</string>
+    <string name="btn_take">Take</string>
+    <string name="duration_days">%d day(s)</string>
+    <string name="duration_continuous">Continuous</string>
+    <string name="not_taken">Not taken</string>
+    <string name="taken_at">Taken at %s</string>
+    <string name="take_medicine_schedule_today">Today\'s schedule:</string>
+    
+    <string name="dialog_title_take_med">Take Medicine</string>
+    <string name="dialog_msg_take_med">Are you sure?</string>
 </resources>

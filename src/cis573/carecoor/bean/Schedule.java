@@ -49,4 +49,14 @@ public class Schedule implements Serializable {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof Schedule) {
+			Schedule s = (Schedule) o;
+			return createDate.getTime() == s.getCreateDate().getTime()
+					&& medicine.getId() == s.getMedicine().getId();
+		}
+		return false;
+	}
 }

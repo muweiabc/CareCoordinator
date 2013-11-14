@@ -1,5 +1,6 @@
 package cis573.carecoor.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -7,12 +8,15 @@ import java.util.Locale;
 import android.content.Context;
 
 public class Utils {
+	
+	private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("M/d/yyyy", Locale.US);
+	private static final SimpleDateFormat mTimeFormat = new SimpleDateFormat("h:mm a", Locale.US);
 
 	public static void callPhone(Context context, String number) {
 		
 	}
 	
-	public static String getWeekName(int week) {
+	public static String getWeekNameShort(int week) {
 		switch(week) {
 		case Calendar.SUNDAY: return "SUN";
 		case Calendar.MONDAY: return "MON";
@@ -21,6 +25,19 @@ public class Utils {
 		case Calendar.THURSDAY: return "THU";
 		case Calendar.FRIDAY: return "FRI";
 		case Calendar.SATURDAY: return "SAT";
+		default: return "";
+		}
+	}
+	
+	public static String getWeekName(int week) {
+		switch(week) {
+		case Calendar.SUNDAY: return "Sunday";
+		case Calendar.MONDAY: return "Monday";
+		case Calendar.TUESDAY: return "Tuesday";
+		case Calendar.WEDNESDAY: return "Wednesday";
+		case Calendar.THURSDAY: return "Thursday";
+		case Calendar.FRIDAY: return "Friday";
+		case Calendar.SATURDAY: return "Saturday";
 		default: return "";
 		}
 	}
@@ -43,5 +60,13 @@ public class Utils {
 		return day1.get(Calendar.YEAR) == day2.get(Calendar.YEAR)
 				&& day1.get(Calendar.MONTH) == day2.get(Calendar.MONTH)
 				&& day1.get(Calendar.DATE) == day2.get(Calendar.DATE);
+	}
+	
+	public static String getDateString(Date date) {
+		return mDateFormat.format(date);
+	}
+	
+	public static String getTimeString(Date date) {
+		return mTimeFormat.format(date);
 	}
 }

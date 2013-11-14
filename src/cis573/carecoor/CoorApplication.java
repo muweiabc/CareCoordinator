@@ -16,6 +16,7 @@ public class CoorApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		initUsefulContacts();
+		MedicineCenter.init(this);
 	}
 	
 	private void initUsefulContacts() {

@@ -27,6 +27,7 @@ import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.data.ScheduleCenter;
+import cis573.carecoor.utils.Const;
 import cis573.carecoor.utils.Utils;
 
 public class MedScheduleFragment extends Fragment {
@@ -34,6 +35,7 @@ public class MedScheduleFragment extends Fragment {
 	public static final String TAG = "MedScheduleFragment";
 	
 	private static final int REQUEST_NEW_SCHEDULE = 0;
+	private static final int REQUEST_TAKE = 1;
 
 	private Button mBtnNew;
 	private ListView mLvSchedules;
@@ -65,7 +67,7 @@ public class MedScheduleFragment extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == REQUEST_NEW_SCHEDULE) {
+		if(requestCode == REQUEST_NEW_SCHEDULE || requestCode == REQUEST_TAKE) {
 			if(resultCode == Activity.RESULT_OK) {
 				mAdapter.setScheduleList(DataCenter.getSchedules(getActivity()));
 				mAdapter.notifyDataSetChanged();
@@ -77,7 +79,10 @@ public class MedScheduleFragment extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			
+			Schedule item = (Schedule) parent.getItemAtPosition(position);
+			Intent intent = new Intent(getActivity(), TakeMedicineActivity.class);
+			intent.putExtra(Const.EXTRA_SCHEDULE, item);
+			startActivityForResult(intent, REQUEST_TAKE);
 		}
 	};
 	

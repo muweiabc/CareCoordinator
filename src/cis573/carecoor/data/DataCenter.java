@@ -119,6 +119,6 @@ public class DataCenter {
 			mTakeRecords = new ArrayList<TakeRecord>();
 		}
 		mTakeRecords.add(record);
-		FileKit.saveObject(context, FILENAME_TAKE_RECORD, record);
+		FileKit.saveObject(context, FILENAME_TAKE_RECORD, mTakeRecords);
 	}
 }

@@ -21,7 +21,7 @@ public class MedicineCenter {
 	
 	private static List<Medicine> mMedList = null;
 	
-	private static void init(Context context) {
+	public static void init(Context context) {
 		String json = ResourceKit.readAsString(context, R.raw.medicine_list);
 		try {
 			mMedList = JsonFactory.parseMedicineList(new JSONArray(json));

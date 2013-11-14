@@ -2,6 +2,7 @@ package cis573.carecoor;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -123,9 +124,9 @@ public class SetScheduleActivity extends Activity {
 	private void initTakeTimeGrid() {
 		ToggleButton tb;
 		Calendar calendar = Calendar.getInstance(Locale.US);
-		calendar.set(Calendar.HOUR_OF_DAY, 6);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		String text;
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 24; i++) {
 			tb = (ToggleButton) View.inflate(SetScheduleActivity.this, R.layout.my_toggle_button, null);
 			text = getTakeTimeText(calendar);
 			tb.setTag(calendar.get(Calendar.HOUR_OF_DAY));
@@ -147,7 +148,7 @@ public class SetScheduleActivity extends Activity {
 		for(int i = 0; i < 7; i++) {
 			tb = (ToggleButton) View.inflate(SetScheduleActivity.this, R.layout.my_toggle_button, null);
 			tb.setTag(calendar.get(Calendar.DAY_OF_WEEK));
-			text = Utils.getWeekName(calendar.get(Calendar.DAY_OF_WEEK));
+			text = Utils.getWeekNameShort(calendar.get(Calendar.DAY_OF_WEEK));
 			tb.setText(text);
 			tb.setTextOff(text);
 			tb.setTextOn(text);
@@ -271,10 +272,12 @@ public class SetScheduleActivity extends Activity {
 		
 		Schedule schedule = new Schedule(new Date());
 		schedule.setMedicine(mMedicine);
+		Collections.sort(mTakeTimes);
 		schedule.setHours(mTakeTimes);
 		if(mRgDayIntv.getCheckedRadioButtonId() == R.id.set_schedule_every_day) {
 			schedule.setDays(null);
 		} else if(mRgDayIntv.getCheckedRadioButtonId() == R.id.set_schedule_pick_days) {
+			Collections.sort(mTakeDays);
 			schedule.setDays(mTakeDays);
 		}
 		if(mRgDuration.getCheckedRadioButtonId() == R.id.set_schedule_continuous) {

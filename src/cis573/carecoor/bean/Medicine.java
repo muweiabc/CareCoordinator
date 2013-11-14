@@ -8,6 +8,7 @@ public class Medicine implements Serializable {
 
 	public static final String TAG = "Medicine";
 	
+	private int id;
 	private String name;
 	private String detailedName;
 	private String instructions;
@@ -17,6 +18,14 @@ public class Medicine implements Serializable {
 	private int interval;
 	private int duration;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

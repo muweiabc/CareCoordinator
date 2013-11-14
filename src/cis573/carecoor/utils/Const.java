@@ -9,4 +9,5 @@ public class Const {
 	
 	public static final String EXTRA_CONTACT = "cis573.carecoor.contact";
 	public static final String EXTRA_MEDICINE = "cis573.carecoor.medicine";
+	public static final String EXTRA_SCHEDULE = "cis573.carecoor.schedule";
 }

@@ -17,6 +17,7 @@ public class JsonFactory {
 			return null;
 		}
 		Medicine item = new Medicine();
+		item.setId(json.optInt("id"));
 		item.setName(json.optString("name"));
 		item.setDetailedName(json.optString("detailed_name"));
 		item.setInstructions(json.optString("instructions"));

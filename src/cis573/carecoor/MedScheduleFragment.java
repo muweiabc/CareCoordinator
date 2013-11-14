@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +26,8 @@ import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
+import cis573.carecoor.data.ScheduleCenter;
+import cis573.carecoor.utils.Utils;
 
 public class MedScheduleFragment extends Fragment {
 
@@ -143,10 +146,11 @@ public class MedScheduleFragment extends Fragment {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder vh;
 			if(convertView == null) {
-				convertView = View.inflate(mContext, R.layout.medicine_list_item, null);
+				convertView = View.inflate(mContext, R.layout.schedule_item, null);
 				vh = new ViewHolder();
-				vh.name = (TextView) convertView.findViewById(R.id.medlist_item_name);
-				vh.image = (ImageView) convertView.findViewById(R.id.medlist_item_image);
+				vh.name = (TextView) convertView.findViewById(R.id.schedule_item_name);
+				vh.state = (TextView) convertView.findViewById(R.id.schedule_item_status);
+				vh.image = (ImageView) convertView.findViewById(R.id.schedule_item_image);
 				convertView.setTag(vh);
 			} else {
 				vh = (ViewHolder) convertView.getTag();
@@ -154,17 +158,34 @@ public class MedScheduleFragment extends Fragment {
 			Medicine med = null;
 			Schedule item = (Schedule) getItem(position);
 			if(item != null) {
+				int state = ScheduleCenter.getScheduleStatus(mContext, item);
+				if(state == ScheduleCenter.SCHEDULE_NO_TODAY) {
+					vh.state.setText(R.string.schedule_state_no_today);
+				} else if(state == ScheduleCenter.SCHEDULE_ENDED) {
+					vh.state.setText(R.string.schedule_state_ended);
+				} else if(state >= 0) {
+					List<Integer> hours = item.getHours();
+					if(state < hours.size()) {	// Not finished
+						String next = mContext.getString(R.string.schedule_state_next,
+								Utils.get12ClockTime(hours.get(state)));
+						vh.state.setText(Html.fromHtml(next));
+					} else {	// Finished
+						String finished = mContext.getString(R.string.schedule_state_finished);
+						vh.state.setText(Html.fromHtml(finished));
+					}
+				}
 				med = item.getMedicine();
-			}
-			if(med != null) {
-				vh.name.setText(med.getName());
-				vh.image.setImageResource(MedicineCenter.getMedicineImageRes(mContext, med));
+				if(med != null) {
+					vh.name.setText(med.getName());
+					vh.image.setImageResource(MedicineCenter.getMedicineImageRes(mContext, med));
+				}
 			}
 			return convertView;
 		}
 		
 		private static class ViewHolder {
 			TextView name;
+			TextView state;
 			ImageView image;
 		}
 	}

@@ -2,6 +2,7 @@ package cis573.carecoor;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,6 +28,7 @@ import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.utils.Const;
+import cis573.carecoor.utils.Utils;
 
 public class SetScheduleActivity extends Activity {
 
@@ -103,7 +105,7 @@ public class SetScheduleActivity extends Activity {
 			mTvTakeDaysSugg.setText(R.string.set_schedule_take_days_everyday);
 			mRgDayIntv.check(R.id.set_schedule_every_day);
 		} else {	// x times per week
-			mTvTakeDaysSugg.setText(getString(R.string.set_schedule_take_days_everyday, mMedicine.getInterval()));
+			mTvTakeDaysSugg.setText(getString(R.string.set_schedule_take_days_week, mMedicine.getInterval()));
 			mRgDayIntv.check(R.id.set_schedule_pick_days);
 		}
 		
@@ -145,26 +147,13 @@ public class SetScheduleActivity extends Activity {
 		for(int i = 0; i < 7; i++) {
 			tb = (ToggleButton) View.inflate(SetScheduleActivity.this, R.layout.my_toggle_button, null);
 			tb.setTag(calendar.get(Calendar.DAY_OF_WEEK));
-			text = getWeekName(calendar.get(Calendar.DAY_OF_WEEK));
+			text = Utils.getWeekName(calendar.get(Calendar.DAY_OF_WEEK));
 			tb.setText(text);
 			tb.setTextOff(text);
 			tb.setTextOn(text);
 			tb.setOnCheckedChangeListener(onTakeDaysBtnClicked);
 			mGlPickDays.addView(tb);
 			calendar.add(Calendar.DAY_OF_WEEK, 1);
-		}
-	}
-	
-	private static String getWeekName(int week) {
-		switch(week) {
-		case Calendar.SUNDAY: return "SUN";
-		case Calendar.MONDAY: return "MON";
-		case Calendar.TUESDAY: return "TUE";
-		case Calendar.WEDNESDAY: return "WED";
-		case Calendar.THURSDAY: return "THU";
-		case Calendar.FRIDAY: return "FRI";
-		case Calendar.SATURDAY: return "SAT";
-		default: return "";
 		}
 	}
 	
@@ -280,7 +269,7 @@ public class SetScheduleActivity extends Activity {
 			return;
 		}
 		
-		Schedule schedule = new Schedule();
+		Schedule schedule = new Schedule(new Date());
 		schedule.setMedicine(mMedicine);
 		schedule.setHours(mTakeTimes);
 		if(mRgDayIntv.getCheckedRadioButtonId() == R.id.set_schedule_every_day) {

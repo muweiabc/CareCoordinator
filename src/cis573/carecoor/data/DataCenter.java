@@ -7,6 +7,7 @@ import android.content.Context;
 
 import cis573.carecoor.bean.Contact;
 import cis573.carecoor.bean.Schedule;
+import cis573.carecoor.bean.TakeRecord;
 import cis573.carecoor.utils.FileKit;
 
 public class DataCenter {
@@ -17,11 +18,13 @@ public class DataCenter {
 	private static final String FILENAME_USEFUL_CONTACTS = "useful_contacts";
 	private static final String FILENAME_DRUG_LISTS="drug_lists";
 	private static final String FILENAME_SCHEDULES="schedules";
+	private static final String FILENAME_TAKE_RECORD = "take_records";
 	
 	private static List<Contact> mUsefulContacts = null;
 	private static List<Contact> mDrugs = null;
 	private static List<Contact> mUserContacts = null;
 	private static List<Schedule> mSchedules = null;
+	private static List<TakeRecord> mTakeRecords = null;
 	
 	public static List<Contact> getUsefulContacts(Context context) {
 		if(mUsefulContacts == null) {
@@ -99,5 +102,23 @@ public class DataCenter {
 		}
 		mSchedules.remove(schedule);
 		FileKit.saveObject(context, FILENAME_SCHEDULES, mSchedules);
+	}
+	
+	public static List<TakeRecord> getTakeRecords(Context context) {
+		if(mTakeRecords == null) {
+			mTakeRecords = (List<TakeRecord>) FileKit.readObject(context, FILENAME_TAKE_RECORD);
+		}
+		return mTakeRecords;
+	}
+	
+	public static void addTakeRecord(Context context, TakeRecord record) {
+		if(mTakeRecords == null) {
+			mTakeRecords = (List<TakeRecord>) FileKit.readObject(context, FILENAME_TAKE_RECORD);
+		}
+		if(mTakeRecords == null) {
+			mTakeRecords = new ArrayList<TakeRecord>();
+		}
+		mTakeRecords.add(record);
+		FileKit.saveObject(context, FILENAME_TAKE_RECORD, record);
 	}
 }

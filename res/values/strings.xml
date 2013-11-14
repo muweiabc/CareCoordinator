@@ -102,4 +102,9 @@
     
     <string name="dialog_title_remove_schedule">Remove Schedule</string>
     <string name="msg_remove_schedule">Remove this schedule?</string>
+    
+    <string name="schedule_state_no_today">No schedule today</string>
+    <string name="schedule_state_ended">Schedule ended</string>
+    <string name="schedule_state_next">&lt;font color=\"#f06d36\">Next time to take: %s&lt;/font></string>
+    <string name="schedule_state_finished">&lt;font color=\"#11e238\">Today\'s schedule finished&lt;/font></string>
 </resources>

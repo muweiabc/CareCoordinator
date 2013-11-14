@@ -11,6 +11,7 @@ public class Utils {
 	
 	private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("M/d/yyyy", Locale.US);
 	private static final SimpleDateFormat mTimeFormat = new SimpleDateFormat("h:mm a", Locale.US);
+	private static final SimpleDateFormat mDateTimeFormat = new SimpleDateFormat("M/d/yyyy h:mm a", Locale.US);
 
 	public static void callPhone(Context context, String number) {
 		
@@ -45,7 +46,7 @@ public class Utils {
 	public static String get12ClockTime(int hour) {
 		String ampm = hour >= 12 ? "PM" : "AM";
 		int hour12 = hour > 12 ? hour - 12 : hour;
-		return "" + hour12 + ":00" + ampm;
+		return "" + hour12 + ":00 " + ampm;
 	}
 	
 	public static boolean inSameDay(Date day1, Date day2) {
@@ -68,5 +69,9 @@ public class Utils {
 	
 	public static String getTimeString(Date date) {
 		return mTimeFormat.format(date);
+	}
+	
+	public static String getDateTimeString(Date date) {
+		return mDateTimeFormat.format(date);
 	}
 }

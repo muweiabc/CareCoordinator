@@ -1,7 +1,9 @@
 package cis573.carecoor;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.bean.Schedule;
@@ -36,6 +38,7 @@ public class TakeMedicineActivity extends Activity {
 	
 	private Schedule mSchedule;
 	private boolean mTaken = false;
+	private int mNextHour = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +148,9 @@ public class TakeMedicineActivity extends Activity {
 			List<Integer> hours = mSchedule.getHours();
 			List<TakeRecord> records = ScheduleCenter.getDayTakeRecordsForScheduleToday(TakeMedicineActivity.this,
 					mSchedule);
+			if(records != null && records.size() < hours.size()) {
+				mNextHour = hours.get(records.size());
+			}
 			
 			int hour;
 			TakeRecord record;
@@ -174,6 +180,16 @@ public class TakeMedicineActivity extends Activity {
 			}
 		}
 	}
+	
+	private int getDelayedMinutes(int plannedHour, Date time) {
+		Calendar planned = Calendar.getInstance(Locale.US);
+		planned.set(Calendar.HOUR_OF_DAY, plannedHour);
+		planned.set(Calendar.MINUTE, 0);
+		planned.set(Calendar.SECOND, 0);
+		planned.set(Calendar.MILLISECOND, 0);
+		long msDiff = time.getTime() - planned.getTimeInMillis();
+		return (int) (msDiff / 1000 / 60);
+	}
 
 	public void onTakeClick(View v) {
 		new AlertDialog.Builder(TakeMedicineActivity.this)
@@ -182,7 +198,10 @@ public class TakeMedicineActivity extends Activity {
 		.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				TakeRecord record = new TakeRecord(mSchedule, new Date());
+				Date now = new Date();
+				TakeRecord record = new TakeRecord(mSchedule, now);
+				record.setPlanned(mNextHour);
+				record.setDelay(getDelayedMinutes(mNextHour, now));
 				DataCenter.addTakeRecord(TakeMedicineActivity.this, record);
 				showScheduleStatus();
 				mTaken = true;

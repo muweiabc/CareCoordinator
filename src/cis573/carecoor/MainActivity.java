@@ -150,10 +150,12 @@ public class MainActivity extends FragmentActivity
 				f = new AlertConfFragment();
 			} else if(arg0 == 1) {	// Contact
 				f = new ContactFragment();
-			} else if(arg0 == 2){
+			} else if(arg0 == 2){	// Reminder
 				f = new MedScheduleFragment();
-			} else if(arg0 == 3) {	// Friends
-				f = new FriendsFragment();	
+			} else if(arg0 == 3) {	// History
+				f = new HistoryFragment();	
+			} else if(arg0 == 4) {	// Friends
+				f = new FriendsFragment();
 			} else {
 				f = DummyFragment.newInstance(mPageTitles[arg0]);
 			}

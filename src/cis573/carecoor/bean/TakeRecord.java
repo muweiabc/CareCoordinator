@@ -5,12 +5,17 @@ import java.util.Date;
 
 public class TakeRecord implements Serializable {
 
-	private static final long serialVersionUID = 5252408419699703707L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6766320305558216819L;
 
 	public static final String TAG = "TakeRecord";
 	
 	private Schedule schedule;
 	private Date takeTime;
+	private int planned;
+	private int delay;
 	
 	public TakeRecord(Schedule schedule, Date takeTime) {
 		this.schedule = schedule;
@@ -29,4 +34,21 @@ public class TakeRecord implements Serializable {
 	public void setTakeTime(Date takeTime) {
 		this.takeTime = takeTime;
 	}
+
+	public int getPlanned() {
+		return planned;
+	}
+
+	public void setPlanned(int planned) {
+		this.planned = planned;
+	}
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
 }

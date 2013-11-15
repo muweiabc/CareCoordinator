@@ -11,6 +11,7 @@ import cis573.carecoor.bean.TakeRecord;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.data.ScheduleCenter;
+import cis573.carecoor.reminder.ReminderCenter;
 import cis573.carecoor.utils.Const;
 import cis573.carecoor.utils.Utils;
 import android.app.Activity;
@@ -203,6 +204,7 @@ public class TakeMedicineActivity extends Activity {
 				record.setPlanned(mNextHour);
 				record.setDelay(getDelayedMinutes(mNextHour, now));
 				DataCenter.addTakeRecord(TakeMedicineActivity.this, record);
+				ReminderCenter.addNextReminder(TakeMedicineActivity.this, mSchedule);
 				showScheduleStatus();
 				mTaken = true;
 			}

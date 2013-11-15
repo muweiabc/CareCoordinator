@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.xml.datatype.Duration;
+
 import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.bean.TakeRecord;
 import cis573.carecoor.utils.Utils;
@@ -45,10 +47,8 @@ public class ScheduleCenter {
 		List<Integer> days = schedule.getDays();
 		Calendar now = Calendar.getInstance(Locale.US);
 		if(duration > 0) {	// Has duration
-			Calendar end = Calendar.getInstance(Locale.US);
-			end.setTime(schedule.getCreateDate());
-			end.add(Calendar.DATE, duration);
-			if(now.after(end)) {
+			Date end = getEndOfDaysAfter(schedule.getCreateDate(), duration);
+			if(end.before(now.getTime())) {
 				return SCHEDULE_ENDED;
 			}
 		}
@@ -67,5 +67,61 @@ public class ScheduleCenter {
 			result = records != null ? records.size() : 0;
 		}
 		return result;
+	}
+	
+	public static Date getNextUntakeScheduledTime(Context context, Schedule schedule) {
+		int duration = schedule.getDuration();
+		List<Integer> days = schedule.getDays();
+		Calendar time = Calendar.getInstance(Locale.US);
+		Date end = null;
+		if(duration > 0) {	// Has duration
+			end = getEndOfDaysAfter(schedule.getCreateDate(), duration);
+		}
+		while(true) {
+			if(end != null && end.before(time.getTime())) {	// Has ended
+				return null;
+			}
+			if(days == null || days.contains(time.get(Calendar.DAY_OF_WEEK))) {
+				// Has schedule today: check next schedule today;
+				List<Integer> hours = schedule.getHours();
+				Calendar next = Calendar.getInstance(Locale.US);
+				next.setTime(time.getTime());
+				for(int hour : hours) {
+					next.set(Calendar.HOUR_OF_DAY, hour);
+					next.set(Calendar.MINUTE, 0);
+					next.set(Calendar.SECOND, 0);
+					next.set(Calendar.MILLISECOND, 0);
+					if(time.before(next)) {	// Check take records
+						List<TakeRecord> records = getDayTakeRecordsForSchedule(context,
+								schedule, time.getTime());
+						if(records != null && records.size() > 0) {
+							TakeRecord record = records.get(0);
+							if(record.getPlanned() == hour) {	// Has taken, check next schedule
+								continue;
+							}
+						}
+						return next.getTime();
+					}
+				}
+			}
+			// No schedule today: move the time to the beginning of the next day
+			time.add(Calendar.DATE, 1);
+			time.set(Calendar.HOUR_OF_DAY, 0);
+			time.set(Calendar.MINUTE, 0);
+			time.set(Calendar.SECOND, 0);
+			time.set(Calendar.MILLISECOND, 0);
+		}
+	}
+	
+	public static Date getEndOfDaysAfter(Date time, int after) {
+		Calendar end = Calendar.getInstance(Locale.US);
+		end.setTime(time);
+		end.set(Calendar.HOUR_OF_DAY, 0);
+		end.set(Calendar.MINUTE, 0);
+		end.set(Calendar.SECOND, 0);
+		end.set(Calendar.MILLISECOND, 0);
+		end.add(Calendar.DATE, after);
+		end.add(Calendar.SECOND, -1);	// Ended at 23:59:59 the previous day
+		return end.getTime();
 	}
 }

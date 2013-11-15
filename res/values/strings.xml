@@ -130,5 +130,9 @@
     <string name="history_taken_at">Taken at: %s</string>
     <string name="history_planned">Planned take time: %s</string>
     <string name="history_ontime">On time</string>
-    <string name="history_late">Late for %d minutes</string>
+    <string name="history_late">Late for %s</string>
+    
+    <string name="reminder_title">Medicine Reminder</string>
+    <string name="reminder_ticker">Time to take your medicine!</string>
+    <string name="reminder_text">Medicine: %1$s; Scheduled take time: %2$s</string>
 </resources>

@@ -83,10 +83,7 @@ public class DataCenter {
 	}
 	
 	public static void addSchedule(Context context, Schedule schedule) {
-		if(mSchedules == null) {
-			mSchedules = (List<Schedule>) FileKit.readObject(context, FILENAME_SCHEDULES);
-		}
-		if(mSchedules == null) {
+		if(getSchedules(context) == null) {
 			mSchedules = new ArrayList<Schedule>();
 		}
 		mSchedules.add(schedule);
@@ -94,14 +91,18 @@ public class DataCenter {
 	}
 	
 	public static void removeSchedule(Context context, Schedule schedule) {
-		if(mSchedules == null) {
-			mSchedules = (List<Schedule>) FileKit.readObject(context, FILENAME_SCHEDULES);
-		}
-		if(mSchedules == null) {
+		if(getSchedules(context) == null) {
 			return;
 		}
 		mSchedules.remove(schedule);
 		FileKit.saveObject(context, FILENAME_SCHEDULES, mSchedules);
+	}
+	
+	public static int getScheduleId(Context context, Schedule schedule) {
+		if(getSchedules(context) == null) {
+			return -1;
+		}
+		return mSchedules.indexOf(schedule);
 	}
 	
 	public static List<TakeRecord> getTakeRecords(Context context) {

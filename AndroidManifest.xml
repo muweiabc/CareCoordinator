@@ -54,6 +54,18 @@
         </activity>
         <activity android:name="SetScheduleActivity" android:screenOrientation="portrait"/>
         <activity android:name="TakeMedicineActivity" android:screenOrientation="portrait"/>
+        <receiver android:name=".reminder.ReminderReceiver">
+            <intent-filter>
+                <action android:name="cis573.carecoor.reminder.alarm"/>
+                <data android:scheme="reminder"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".reminder.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        
     </application>
 
 </manifest>

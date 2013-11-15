@@ -28,6 +28,7 @@ import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
+import cis573.carecoor.reminder.ReminderCenter;
 import cis573.carecoor.utils.Const;
 import cis573.carecoor.utils.Utils;
 
@@ -287,6 +288,7 @@ public class SetScheduleActivity extends Activity {
 		}
 		
 		DataCenter.addSchedule(SetScheduleActivity.this, schedule);
+		ReminderCenter.addNextReminder(SetScheduleActivity.this, schedule);
 		
 		setResult(RESULT_OK);
 		finish();

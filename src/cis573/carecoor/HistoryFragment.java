@@ -21,6 +21,8 @@ import android.widget.TextView;
 public class HistoryFragment extends Fragment {
 
 	public static final String TAG = "HistoryFragment";
+	
+	public static final int ONTIME_OFFSET = 10;
 
 	private ListView mListView;
 	private HistoryAdapter mAdapter;
@@ -110,12 +112,18 @@ public class HistoryFragment extends Fragment {
 				vh.text2.setText(sb.toString());
 				
 				int delay = item.getDelay();
-				if(delay <= 10) {
+				if(delay <= ONTIME_OFFSET) {
 					vh.delay.setText(R.string.history_ontime);
 					vh.delay.setTextColor(mContext.getResources().getColor(R.color.green_text));
 					vh.delay.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_check, 0, 0, 0);
 				} else {
-					vh.delay.setText(mContext.getString(R.string.history_late, delay));
+					String delayStr = "";
+					if(delay >= 60) {
+						delayStr = "" + (delay / 60) + " hour(s)";
+					} else {
+						delayStr = "" + delay + "minutes";
+					}
+					vh.delay.setText(mContext.getString(R.string.history_late, delayStr));
 					vh.delay.setTextColor(mContext.getResources().getColor(R.color.orange_light_text));
 					vh.delay.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_exclaimation, 0, 0, 0);
 				}

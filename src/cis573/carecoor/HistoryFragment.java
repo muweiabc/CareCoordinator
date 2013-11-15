@@ -2,12 +2,6 @@ package cis573.carecoor;
 
 import java.util.List;
 
-import cis573.carecoor.bean.Medicine;
-import cis573.carecoor.bean.Schedule;
-import cis573.carecoor.bean.TakeRecord;
-import cis573.carecoor.data.DataCenter;
-import cis573.carecoor.utils.Utils;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import cis573.carecoor.bean.Medicine;
+import cis573.carecoor.bean.TakeRecord;
+import cis573.carecoor.data.DataCenter;
+import cis573.carecoor.utils.Utils;
 
 public class HistoryFragment extends Fragment {
 

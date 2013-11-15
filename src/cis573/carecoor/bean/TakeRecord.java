@@ -12,20 +12,20 @@ public class TakeRecord implements Serializable {
 
 	public static final String TAG = "TakeRecord";
 	
-	private int scheduleHash;
+	private Date schCreateTime;
 	private Medicine medicine;
 	private Date takeTime;
 	private Date plannedTime;
 
 	public TakeRecord(Schedule schedule, Date takeTime, Date plannedTime) {
-		this.scheduleHash = schedule.hashCode();
+		this.schCreateTime = schedule.getCreateDate();
 		this.medicine = schedule.getMedicine();
 		this.takeTime = takeTime;
 		this.plannedTime = plannedTime;
 	}
 
 	public boolean belongsTo(Schedule schedule) {
-		return this.scheduleHash == schedule.hashCode();
+		return this.schCreateTime.getTime() == schedule.getCreateDate().getTime();
 	}
 
 	public Medicine getMedicine() {

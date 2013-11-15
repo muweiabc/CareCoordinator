@@ -1,8 +1,10 @@
 package cis573.carecoor.bean;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Schedule implements Serializable {
 
@@ -98,6 +100,13 @@ public class Schedule implements Serializable {
 			if(o instanceof Time) {
 				Time t = (Time) o;
 				return hour == t.hour && minute == t.minute;
+			} else if(o instanceof Date) {
+				Calendar cal = Calendar.getInstance(Locale.US);
+				cal.setTime((Date) o);
+				return hour == cal.get(Calendar.HOUR_OF_DAY) && minute == cal.get(Calendar.MINUTE);
+			} else if(o instanceof Calendar) {
+				Calendar c = (Calendar) o;
+				return hour == c.get(Calendar.HOUR_OF_DAY) && minute == c.get(Calendar.MINUTE);
 			}
 			return false;
 		}

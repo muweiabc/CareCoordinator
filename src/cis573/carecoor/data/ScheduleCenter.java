@@ -91,9 +91,15 @@ public class ScheduleCenter {
 						// Check take records
 						List<TakeRecord> records = getDayTakeRecordsForSchedule(context,
 								schedule, time.getTime());
-						if(records != null && records.size() > 0) {
-							TakeRecord record = records.get(0);
-							if(plan.equals(record.getPlannedTime())) {	// Has taken, check next schedule
+						if(records != null) {
+							boolean find = false;
+							for(TakeRecord record : records) {
+								if(plan.equals(record.getPlannedTime())) {	// Has taken, check next schedule
+									find = true;
+									break;
+								}
+							}
+							if(find) {
 								continue;
 							}
 						}

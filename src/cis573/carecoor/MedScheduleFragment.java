@@ -172,7 +172,6 @@ public class MedScheduleFragment extends Fragment {
 				} else if(state == ScheduleCenter.SCHEDULE_ENDED) {
 					vh.state.setText(R.string.schedule_state_ended);
 				} else if(state >= 0) {
-//					List<Integer> hours = item.getHours();
 					List<Time> times = item.getTimes();
 					if(state < times.size()) {	// Not finished
 						String next = mContext.getString(R.string.schedule_state_next,

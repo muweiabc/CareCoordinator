@@ -5,29 +5,37 @@ import java.util.Date;
 
 public class TakeRecord implements Serializable {
 
-	/**
+ 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6766320305558216819L;
+	private static final long serialVersionUID = -3389156036735869960L;
 
 	public static final String TAG = "TakeRecord";
 	
-	private Schedule schedule;
+	private int scheduleHash;
+	private Medicine medicine;
 	private Date takeTime;
-	private int planned;
-	private int delay;
-	
-	public TakeRecord(Schedule schedule, Date takeTime) {
-		this.schedule = schedule;
+	private Date plannedTime;
+
+	public TakeRecord(Schedule schedule, Date takeTime, Date plannedTime) {
+		this.scheduleHash = schedule.hashCode();
+		this.medicine = schedule.getMedicine();
 		this.takeTime = takeTime;
+		this.plannedTime = plannedTime;
 	}
-	
-	public Schedule getSchedule() {
-		return schedule;
+
+	public boolean belongsTo(Schedule schedule) {
+		return this.scheduleHash == schedule.hashCode();
 	}
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
+
+	public Medicine getMedicine() {
+		return medicine;
 	}
+
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
+	}
+
 	public Date getTakeTime() {
 		return takeTime;
 	}
@@ -35,20 +43,19 @@ public class TakeRecord implements Serializable {
 		this.takeTime = takeTime;
 	}
 
-	public int getPlanned() {
-		return planned;
+	public Date getPlannedTime() {
+		return plannedTime;
 	}
 
-	public void setPlanned(int planned) {
-		this.planned = planned;
+	public void setPlannedTime(Date plannedTime) {
+		this.plannedTime = plannedTime;
 	}
 
-	public int getDelay() {
-		return delay;
-	}
-
-	public void setDelay(int delay) {
-		this.delay = delay;
+	public int getDelayedMinutes() {
+		if(takeTime == null || plannedTime == null) {
+			return 0;
+		}
+		return (int) ((takeTime.getTime() - plannedTime.getTime()) / 1000 / 60);
 	}
 
 }

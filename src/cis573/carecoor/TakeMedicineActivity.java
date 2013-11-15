@@ -1,19 +1,8 @@
 package cis573.carecoor;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import cis573.carecoor.bean.Medicine;
-import cis573.carecoor.bean.Schedule;
-import cis573.carecoor.bean.TakeRecord;
-import cis573.carecoor.data.DataCenter;
-import cis573.carecoor.data.MedicineCenter;
-import cis573.carecoor.data.ScheduleCenter;
-import cis573.carecoor.reminder.ReminderCenter;
-import cis573.carecoor.utils.Const;
-import cis573.carecoor.utils.Utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -23,6 +12,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cis573.carecoor.bean.Medicine;
+import cis573.carecoor.bean.Schedule;
+import cis573.carecoor.bean.Schedule.Time;
+import cis573.carecoor.bean.TakeRecord;
+import cis573.carecoor.data.DataCenter;
+import cis573.carecoor.data.MedicineCenter;
+import cis573.carecoor.data.ScheduleCenter;
+import cis573.carecoor.reminder.ReminderCenter;
+import cis573.carecoor.utils.Const;
+import cis573.carecoor.utils.Utils;
 
 public class TakeMedicineActivity extends Activity {
 
@@ -39,7 +38,7 @@ public class TakeMedicineActivity extends Activity {
 	
 	private Schedule mSchedule;
 	private boolean mTaken = false;
-	private int mNextHour = 0;
+	private Time mNextTime = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +94,13 @@ public class TakeMedicineActivity extends Activity {
 				Utils.getDateString(mSchedule.getCreateDate()))).append('\n');
 		
 		StringBuilder sbHours = new StringBuilder();
-		List<Integer> hours = mSchedule.getHours();
-		int hour;
-		for(int i = 0; i < hours.size(); i++) {
-			hour = hours.get(i);
-			sbHours.append(Utils.get12ClockTime(hour));
-			if(i != hours.size() - 1) {
+//		List<Integer> hours = mSchedule.getHours();
+		List<Time> times = mSchedule.getTimes();
+		Time time;
+		for(int i = 0; i < times.size(); i++) {
+			time = times.get(i);
+			sbHours.append(Utils.get12ClockTimeString(time));
+			if(i != times.size() - 1) {
 				sbHours.append(", ");
 			}
 		}
@@ -146,24 +146,26 @@ public class TakeMedicineActivity extends Activity {
 			mTvScheduleStatus.setText(R.string.schedule_state_ended);
 		} else if(status >= 0) {
 			mTvScheduleStatus.setText(R.string.take_medicine_schedule_today);
-			List<Integer> hours = mSchedule.getHours();
+//			List<Integer> hours = mSchedule.getHours();
+			List<Time> times = mSchedule.getTimes();
 			List<TakeRecord> records = ScheduleCenter.getDayTakeRecordsForScheduleToday(TakeMedicineActivity.this,
 					mSchedule);
-			if(records != null && records.size() < hours.size()) {
-				mNextHour = hours.get(records.size());
+			if(records != null && records.size() < times.size()) {
+				mNextTime = times.get(records.size());
 			}
 			
-			int hour;
+//			int hour;
+			Time time;
 			TakeRecord record;
 			View statusView;
 			TextView tvHour, tvTaken;
-			for(int i = 0; i < hours.size(); i++) {
+			for(int i = 0; i < times.size(); i++) {
 				statusView = View.inflate(TakeMedicineActivity.this, R.layout.schedule_status_item, null);
 				tvHour = (TextView) statusView.findViewById(R.id.schedule_status_time);
 				tvTaken = (TextView) statusView.findViewById(R.id.schedule_status_taken);
 				
-				hour = hours.get(i);
-				tvHour.setText(Utils.get12ClockTime(hour));
+				time = times.get(i);
+				tvHour.setText(Utils.get12ClockTimeString(time));
 				if(records != null) {
 					if(i < records.size()) {
 						record = records.get(i);
@@ -176,20 +178,10 @@ public class TakeMedicineActivity extends Activity {
 				mStatusLayout.addView(statusView);
 			}
 			
-			if(records == null || records.size() < hours.size()) {
+			if(records == null || records.size() < times.size()) {
 				mBtnTake.setEnabled(true);
 			}
 		}
-	}
-	
-	private int getDelayedMinutes(int plannedHour, Date time) {
-		Calendar planned = Calendar.getInstance(Locale.US);
-		planned.set(Calendar.HOUR_OF_DAY, plannedHour);
-		planned.set(Calendar.MINUTE, 0);
-		planned.set(Calendar.SECOND, 0);
-		planned.set(Calendar.MILLISECOND, 0);
-		long msDiff = time.getTime() - planned.getTimeInMillis();
-		return (int) (msDiff / 1000 / 60);
 	}
 
 	public void onTakeClick(View v) {
@@ -200,9 +192,7 @@ public class TakeMedicineActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Date now = new Date();
-				TakeRecord record = new TakeRecord(mSchedule, now);
-				record.setPlanned(mNextHour);
-				record.setDelay(getDelayedMinutes(mNextHour, now));
+				TakeRecord record = new TakeRecord(mSchedule, now, Utils.getAdjustedDate(now, mNextTime));
 				DataCenter.addTakeRecord(TakeMedicineActivity.this, record);
 				ReminderCenter.addNextReminder(TakeMedicineActivity.this, mSchedule);
 				showScheduleStatus();

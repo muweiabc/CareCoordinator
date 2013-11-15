@@ -1,9 +1,7 @@
 package cis573.carecoor.reminder;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -26,7 +24,7 @@ public class ReminderCenter {
 		}
 		Date next = ScheduleCenter.getNextUntakeScheduledTime(context, schedule);
 		if(next != null) {
-			Intent intent = getReminderIntent(context, schedule, next);
+			Intent intent = getReminderIntent(context, schedule);
 			if(intent != null) {
 				AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 				PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE);
@@ -40,6 +38,20 @@ public class ReminderCenter {
 		}
 	}
 	
+	public static void cancelAlarm(Context context, Schedule schedule) {
+		if(schedule == null) {
+			return;
+		}
+		Intent intent = getReminderIntent(context, schedule);
+		if(intent != null) {
+			PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE);
+			if(pIntent != null) {
+				AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+				alarm.cancel(pIntent);
+			}
+		}
+	}
+	
 	public static void resetAllReminders(Context context) {
 		List<Schedule> schedules = DataCenter.getSchedules(context);
 		if(schedules != null) {
@@ -49,7 +61,7 @@ public class ReminderCenter {
 		}
 	}
 	
-	private static Intent getReminderIntent(Context context, Schedule schedule, Date plan) {
+	private static Intent getReminderIntent(Context context, Schedule schedule) {
 		if(schedule == null) {
 			return null;
 		}
@@ -57,9 +69,6 @@ public class ReminderCenter {
 		intent.setPackage(context.getPackageName());
 		intent.setData(Uri.parse(getReminderId(schedule)));
 		intent.putExtra(Const.EXTRA_SCHEDULE, schedule);
-		Calendar cal = Calendar.getInstance(Locale.US);
-		cal.setTime(plan);
-		intent.putExtra(Const.EXTRA_PLANNED_HOUR, cal.get(Calendar.HOUR_OF_DAY));
 		return intent;
 	}
 	

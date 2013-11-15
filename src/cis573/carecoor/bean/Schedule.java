@@ -6,13 +6,17 @@ import java.util.List;
 
 public class Schedule implements Serializable {
 
-	private static final long serialVersionUID = 6606963513717084253L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8354327699584768411L;
 
 	public static final String TAG = "Schedule";
 	
 	private Date createDate;
 	private Medicine medicine;
-	private List<Integer> hours;
+//	private List<Integer> hours;
+	private List<Time> times;
 	private List<Integer> days;
 	private int duration;
 	
@@ -31,12 +35,18 @@ public class Schedule implements Serializable {
 	public void setMedicine(Medicine medicine) {
 		this.medicine = medicine;
 	}
-	public List<Integer> getHours() {
-		return hours;
+	public List<Time> getTimes() {
+		return times;
 	}
-	public void setHours(List<Integer> hours) {
-		this.hours = hours;
+	public void setTimes(List<Time> times) {
+		this.times = times;
 	}
+	//	public List<Integer> getHours() {
+//		return hours;
+//	}
+//	public void setHours(List<Integer> hours) {
+//		this.hours = hours;
+//	}
 	public List<Integer> getDays() {
 		return days;
 	}
@@ -58,5 +68,38 @@ public class Schedule implements Serializable {
 					&& medicine.getId() == s.getMedicine().getId();
 		}
 		return false;
+	}
+	
+	public static class Time implements Comparable<Time>, Serializable {
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8800508215876351137L;
+		public final int hour;
+		public final int minute;
+		
+		public Time(int hour, int minute) {
+			this.hour = hour;
+			this.minute = minute;
+		}
+		
+		@Override
+		public int compareTo(Time another) {
+			int result = hour - another.hour;
+			if(result == 0) {
+				result = minute - another.minute;
+			}
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if(o instanceof Time) {
+				Time t = (Time) o;
+				return hour == t.hour && minute == t.minute;
+			}
+			return false;
+		}
 	}
 }

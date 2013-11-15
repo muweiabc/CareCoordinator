@@ -9,6 +9,8 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
@@ -16,6 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -23,9 +26,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.ToggleButton;
 import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.bean.Schedule;
+import cis573.carecoor.bean.Schedule.Time;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.reminder.ReminderCenter;
@@ -53,7 +58,7 @@ public class SetScheduleActivity extends Activity {
 	private EditText mEtDuration;
 	
 	private Medicine mMedicine = null;
-	private List<Integer> mTakeTimes = new ArrayList<Integer>();
+	private List<Time> mTakeTimes = new ArrayList<Time>();
 	private List<Integer> mTakeDays = new ArrayList<Integer>();
 	
 	@Override
@@ -130,11 +135,12 @@ public class SetScheduleActivity extends Activity {
 		for(int i = 0; i < 24; i++) {
 			tb = (ToggleButton) View.inflate(SetScheduleActivity.this, R.layout.my_toggle_button, null);
 			text = getTakeTimeText(calendar);
-			tb.setTag(calendar.get(Calendar.HOUR_OF_DAY));
+			tb.setTag(new Time(calendar.get(Calendar.HOUR_OF_DAY), 0));
 			tb.setText(text);
 			tb.setTextOff(text);
 			tb.setTextOn(text);
 			tb.setOnCheckedChangeListener(onTakeTimeBtnClicked);
+			tb.setOnLongClickListener(onTakeTimeBtnLongClick);
 			mGlTakeTime.addView(tb);
 			
 			calendar.add(Calendar.HOUR_OF_DAY, 1);
@@ -162,12 +168,39 @@ public class SetScheduleActivity extends Activity {
 	private OnCheckedChangeListener onTakeTimeBtnClicked = new OnCheckedChangeListener() {
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			int hour = (Integer) buttonView.getTag();
+//			int hour = (Integer) buttonView.getTag();
+			Time time = (Time) buttonView.getTag();
 			if(isChecked) {
-				mTakeTimes.add(hour);
+				mTakeTimes.add(time);
 			} else {
-				mTakeTimes.remove(mTakeTimes.indexOf(hour));
+				mTakeTimes.remove(time);
 			}
+		}
+	};
+	
+	private OnLongClickListener onTakeTimeBtnLongClick = new OnLongClickListener() {
+		@Override
+		public boolean onLongClick(View v) {
+			final ToggleButton btn = (ToggleButton) v;
+			final Time time = (Time) btn.getTag();
+			new TimePickerDialog(SetScheduleActivity.this, new OnTimeSetListener() {
+				@Override
+				public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+					Time newTime = new Time(hourOfDay, minute);
+					btn.setTag(newTime);
+					String text = Utils.get12ClockTimeString(newTime).replace(' ', '\n');
+					btn.setText(text);
+					btn.setTextOn(text);
+					btn.setTextOff(text);
+					if(btn.isChecked()) {
+						mTakeTimes.remove(time);
+						mTakeTimes.add(newTime);
+					} else {
+						btn.setChecked(true);
+					}
+				}
+			}, time.hour, time.minute, false).show();
+			return false;
 		}
 	};
 
@@ -274,7 +307,7 @@ public class SetScheduleActivity extends Activity {
 		Schedule schedule = new Schedule(new Date());
 		schedule.setMedicine(mMedicine);
 		Collections.sort(mTakeTimes);
-		schedule.setHours(mTakeTimes);
+		schedule.setTimes(mTakeTimes);
 		if(mRgDayIntv.getCheckedRadioButtonId() == R.id.set_schedule_every_day) {
 			schedule.setDays(null);
 		} else if(mRgDayIntv.getCheckedRadioButtonId() == R.id.set_schedule_pick_days) {

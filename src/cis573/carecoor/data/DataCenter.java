@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-
 import cis573.carecoor.bean.Contact;
 import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.bean.TakeRecord;

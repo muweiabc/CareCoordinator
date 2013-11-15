@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import cis573.carecoor.bean.Schedule.Time;
+
 import android.content.Context;
 
 public class Utils {
@@ -43,24 +45,35 @@ public class Utils {
 		}
 	}
 	
-	public static String get12ClockTime(int hour) {
+//	public static String get12ClockTime(int hour) {
+//		String ampm = hour >= 12 ? "PM" : "AM";
+//		int hour12 = hour > 12 ? hour - 12 : hour;
+//		return "" + hour12 + ":00 " + ampm;
+//	}
+	
+	public static String get12ClockTimeString(Time time) {
+		int hour = time.hour;
+		int minute = time.minute;
 		String ampm = hour >= 12 ? "PM" : "AM";
 		int hour12 = hour > 12 ? hour - 12 : hour;
-		return "" + hour12 + ":00 " + ampm;
+		String minuteStr = minute >= 10 ? String.valueOf(minute) : "0" + minute;
+		return String.format("%d:%s %s", hour12, minuteStr, ampm);
 	}
 	
-	public static boolean inSameDay(Date day1, Date day2) {
+	public static int compareDays(Date day1, Date day2) {
 		Calendar cal1 = Calendar.getInstance(Locale.US);
 		Calendar cal2 = Calendar.getInstance(Locale.US);
 		cal1.setTime(day1);
 		cal2.setTime(day2);
-		return inSameDay(cal1, cal2);
+		return compareDays(cal1, cal2);
 	}
 	
-	public static boolean inSameDay(Calendar day1, Calendar day2) {
-		return day1.get(Calendar.YEAR) == day2.get(Calendar.YEAR)
-				&& day1.get(Calendar.MONTH) == day2.get(Calendar.MONTH)
-				&& day1.get(Calendar.DATE) == day2.get(Calendar.DATE);
+	public static int compareDays(Calendar day1, Calendar day2) {
+		int result = day1.get(Calendar.YEAR) - day2.get(Calendar.YEAR);
+		if(result == 0) {
+			result = day1.get(Calendar.DAY_OF_YEAR) - day2.get(Calendar.DAY_OF_YEAR);
+		}
+		return result;
 	}
 	
 	public static String getDateString(Date date) {
@@ -73,5 +86,21 @@ public class Utils {
 	
 	public static String getDateTimeString(Date date) {
 		return mDateTimeFormat.format(date);
+	}
+	
+	public static Date getAdjustedDate(Date date, Time time) {
+		Calendar cal = Calendar.getInstance(Locale.US);
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, time.hour);
+		cal.set(Calendar.MINUTE, time.minute);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal.getTime();
+	}
+	
+	public static Time getAdjustedTime(Date date) {
+		Calendar cal = Calendar.getInstance(Locale.US);
+		cal.setTime(date);
+		return new Time(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
 	}
 }

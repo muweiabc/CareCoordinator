@@ -24,9 +24,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.bean.Schedule;
+import cis573.carecoor.bean.Schedule.Time;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.data.ScheduleCenter;
+import cis573.carecoor.reminder.ReminderCenter;
 import cis573.carecoor.utils.Const;
 import cis573.carecoor.utils.Utils;
 
@@ -97,6 +99,7 @@ public class MedScheduleFragment extends Fragment {
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					ReminderCenter.cancelAlarm(getActivity(), item);
 					DataCenter.removeSchedule(getActivity(), item);
 					mAdapter.setScheduleList(DataCenter.getSchedules(getActivity()));
 					mAdapter.notifyDataSetChanged();
@@ -169,10 +172,11 @@ public class MedScheduleFragment extends Fragment {
 				} else if(state == ScheduleCenter.SCHEDULE_ENDED) {
 					vh.state.setText(R.string.schedule_state_ended);
 				} else if(state >= 0) {
-					List<Integer> hours = item.getHours();
-					if(state < hours.size()) {	// Not finished
+//					List<Integer> hours = item.getHours();
+					List<Time> times = item.getTimes();
+					if(state < times.size()) {	// Not finished
 						String next = mContext.getString(R.string.schedule_state_next,
-								Utils.get12ClockTime(hours.get(state)));
+								Utils.get12ClockTimeString(times.get(state)));
 						vh.state.setText(Html.fromHtml(next));
 					} else {	// Finished
 						String finished = mContext.getString(R.string.schedule_state_finished);

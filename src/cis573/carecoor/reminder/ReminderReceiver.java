@@ -1,12 +1,5 @@
 package cis573.carecoor.reminder;
 
-import cis573.carecoor.R;
-import cis573.carecoor.TakeMedicineActivity;
-import cis573.carecoor.bean.Medicine;
-import cis573.carecoor.bean.Schedule;
-import cis573.carecoor.data.DataCenter;
-import cis573.carecoor.utils.Const;
-import cis573.carecoor.utils.Utils;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,6 +7,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import cis573.carecoor.R;
+import cis573.carecoor.TakeMedicineActivity;
+import cis573.carecoor.bean.Medicine;
+import cis573.carecoor.bean.Schedule;
+import cis573.carecoor.data.DataCenter;
+import cis573.carecoor.utils.Const;
 
 public class ReminderReceiver extends BroadcastReceiver {
 
@@ -21,16 +20,16 @@ public class ReminderReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		if(Const.ACTION_REMINDER_ALARM.equals(intent.getAction())) {
 			Schedule schedule = (Schedule) intent.getSerializableExtra(Const.EXTRA_SCHEDULE);
-			int planned = intent.getIntExtra(Const.EXTRA_PLANNED_HOUR, -1);
+//			int planned = intent.getIntExtra(Const.EXTRA_PLANNED_HOUR, -1);
 			if(schedule != null) {
-				showNotification(context, schedule, planned);
+				showNotification(context, schedule);
 			}
 		}
 	}
 	
-	private void showNotification(Context context, Schedule schedule, int planned) {
+	private void showNotification(Context context, Schedule schedule) {
 		String medName = "";
-		String plannedStr = "";
+//		String plannedStr = "";
 		Medicine med = null;
 		if(schedule != null) {
 			med = schedule.getMedicine();
@@ -38,10 +37,10 @@ public class ReminderReceiver extends BroadcastReceiver {
 		if(med != null) {
 			medName = med.getName();
 		}
-		if(planned >= 0) {
-			plannedStr = Utils.get12ClockTime(planned);
-		}
-		String text = context.getString(R.string.reminder_text, medName, plannedStr);
+//		if(planned >= 0) {
+//			plannedStr = Utils.get12ClockTime(planned);
+//		}
+		String text = context.getString(R.string.reminder_text, medName);
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 		.setTicker(context.getString(R.string.reminder_ticker))
 		.setContentTitle(context.getString(R.string.reminder_title))

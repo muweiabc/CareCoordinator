@@ -6,12 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.xml.datatype.Duration;
-
+import android.content.Context;
 import cis573.carecoor.bean.Schedule;
+import cis573.carecoor.bean.Schedule.Time;
 import cis573.carecoor.bean.TakeRecord;
 import cis573.carecoor.utils.Utils;
-import android.content.Context;
 
 public class ScheduleCenter {
 
@@ -33,8 +32,11 @@ public class ScheduleCenter {
 		List<TakeRecord> records = DataCenter.getTakeRecords(context);
 		if(records != null) {
 			for(TakeRecord record : records) {
-				if(record.getSchedule().equals(schedule)
-						&& Utils.inSameDay(record.getTakeTime(), date)) {
+				int compare = Utils.compareDays(record.getTakeTime(), date);
+				if(compare < 0) {
+					break;
+				}
+				if(record.belongsTo(schedule) && compare == 0) {
 					list.add(record);
 				}
 			}
@@ -82,25 +84,20 @@ public class ScheduleCenter {
 				return null;
 			}
 			if(days == null || days.contains(time.get(Calendar.DAY_OF_WEEK))) {
-				// Has schedule today: check next schedule today;
-				List<Integer> hours = schedule.getHours();
-				Calendar next = Calendar.getInstance(Locale.US);
-				next.setTime(time.getTime());
-				for(int hour : hours) {
-					next.set(Calendar.HOUR_OF_DAY, hour);
-					next.set(Calendar.MINUTE, 0);
-					next.set(Calendar.SECOND, 0);
-					next.set(Calendar.MILLISECOND, 0);
-					if(time.before(next)) {	// Check take records
+				List<Time> times = schedule.getTimes();
+				for(Time plan : times) {
+					Date next = Utils.getAdjustedDate(time.getTime(), plan);
+					if(next.after(time.getTime())) {
+						// Check take records
 						List<TakeRecord> records = getDayTakeRecordsForSchedule(context,
 								schedule, time.getTime());
 						if(records != null && records.size() > 0) {
 							TakeRecord record = records.get(0);
-							if(record.getPlanned() == hour) {	// Has taken, check next schedule
+							if(plan.equals(record.getPlannedTime())) {	// Has taken, check next schedule
 								continue;
 							}
 						}
-						return next.getTime();
+						return next;
 					}
 				}
 			}

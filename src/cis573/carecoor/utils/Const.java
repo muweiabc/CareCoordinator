@@ -10,7 +10,7 @@ public class Const {
 	public static final String EXTRA_CONTACT = "cis573.carecoor.contact";
 	public static final String EXTRA_MEDICINE = "cis573.carecoor.medicine";
 	public static final String EXTRA_SCHEDULE = "cis573.carecoor.schedule";
-	public static final String EXTRA_PLANNED_HOUR = "cis573.carecoor.planned_hour";
+	public static final String EXTRA_TIME = "cis573.carecoor.time";
 	
 	public static final String ACTION_REMINDER_ALARM = "cis573.carecoor.reminder.alarm";
 }

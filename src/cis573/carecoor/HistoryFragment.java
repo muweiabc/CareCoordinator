@@ -99,19 +99,16 @@ public class HistoryFragment extends Fragment {
 			
 			TakeRecord item = (TakeRecord) getItem(position);
 			if(item != null) {
-				Schedule schedule = item.getSchedule();
-				if(schedule != null) {
-					Medicine med = schedule.getMedicine();
-					vh.text1.setText(med.getName());
-				}
+				Medicine med = item.getMedicine();
+				vh.text1.setText(med.getName());
 				StringBuilder sb = new StringBuilder();
 				sb.append(mContext.getString(R.string.history_taken_at,
 						Utils.getDateTimeString(item.getTakeTime())))
 						.append('\n').append(mContext.getString(R.string.history_planned,
-								Utils.get12ClockTime(item.getPlanned())));
+								Utils.getTimeString(item.getPlannedTime())));
 				vh.text2.setText(sb.toString());
 				
-				int delay = item.getDelay();
+				int delay = item.getDelayedMinutes();
 				if(delay <= ONTIME_OFFSET) {
 					vh.delay.setText(R.string.history_ontime);
 					vh.delay.setTextColor(mContext.getResources().getColor(R.color.green_text));
@@ -121,7 +118,7 @@ public class HistoryFragment extends Fragment {
 					if(delay >= 60) {
 						delayStr = "" + (delay / 60) + " hour(s)";
 					} else {
-						delayStr = "" + delay + "minutes";
+						delayStr = "" + delay + " minutes";
 					}
 					vh.delay.setText(mContext.getString(R.string.history_late, delayStr));
 					vh.delay.setTextColor(mContext.getResources().getColor(R.color.orange_light_text));

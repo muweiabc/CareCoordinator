@@ -112,7 +112,7 @@
     <string name="schedule_state_finished">&lt;font color=\"#00b050\">Today\'s schedule finished&lt;/font></string>
     
     <!-- Take medicine -->
-    <string name="take_medicine_title">Take medicine</string>
+    <string name="title_take_medicine">Take Medicine</string>
     <string name="take_medicine_schedule_info">Schedule Info</string>
     <string name="take_medicine_created_at">Created at: %s</string>
     <string name="take_medicine_hours_to_take">Hours to take: %s</string>

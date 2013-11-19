@@ -87,7 +87,7 @@ public class ScheduleCenter {
 				List<Time> times = schedule.getTimes();
 				for(Time plan : times) {
 					Date next = Utils.getAdjustedDate(time.getTime(), plan);
-					if(next.after(time.getTime())) {
+					if(!next.before(time.getTime())) {
 						// Check take records
 						List<TakeRecord> records = getDayTakeRecordsForSchedule(context,
 								schedule, time.getTime());

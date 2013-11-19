@@ -3,7 +3,6 @@ package cis573.carecoor;
 import java.util.Date;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import cis573.carecoor.reminder.ReminderCenter;
 import cis573.carecoor.utils.Const;
 import cis573.carecoor.utils.Utils;
 
-public class TakeMedicineActivity extends Activity {
+public class TakeMedicineActivity extends BannerActivity {
 
 	public static final String TAG = "TakeMedicineActivity";
 
@@ -48,6 +47,7 @@ public class TakeMedicineActivity extends Activity {
 			mSchedule = (Schedule) extras.getSerializable(Const.EXTRA_SCHEDULE);
 		}
 		setContentView(R.layout.take_medicine_activity);
+		setBannerTitle(R.string.title_take_medicine);
 		initViews();
 		
 		showMedicineInfo();

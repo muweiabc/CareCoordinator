@@ -43,7 +43,10 @@ public class TakeMedicineActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mSchedule = (Schedule) getIntent().getSerializableExtra(Const.EXTRA_SCHEDULE);
+		Bundle extras = getIntent().getExtras();
+		if(extras != null) {
+			mSchedule = (Schedule) extras.getSerializable(Const.EXTRA_SCHEDULE);
+		}
 		setContentView(R.layout.take_medicine_activity);
 		initViews();
 		

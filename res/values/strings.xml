@@ -13,6 +13,7 @@
     <string name="alertconf_call">Call</string>
     <string name="alertconf_text">Text</string>
     <string name="btn_alert">ALERT</string>
+    <string name="btn_back">&lt;</string>
     <string name="dialog_alert_cfm_title">Alert</string>
     <string name="dialog_alert_cfm">Make an alert call?</string>
     <string name="dialog_alert_secondary">Got helped? If not, you can choose to make an alert call to the primary or secondary number</string>
@@ -34,6 +35,7 @@
     <string name="dialog_contact_phone">Phone</string>
 
     <!-- Pick from contacts -->
+    <string name="title_contacts">Contacts</string>
     <string name="title_pick_from_contacts">Pick a phone number from contacts</string>
 
     <!-- DrugReminder -->
@@ -78,6 +80,7 @@
     <string name="cancel">Cancel</string>
     <string name="back">Back</string>
 
+    <string name="title_new_schedule">New Schedule</string>
     <string name="set_schedule_title">Set medicine schedule:</string>
     <string name="set_schedule_med_info">Medicine Info</string>
     <string name="set_schedule_take_time">Take Time</string>

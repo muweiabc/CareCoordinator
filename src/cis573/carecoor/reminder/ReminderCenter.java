@@ -72,7 +72,7 @@ public class ReminderCenter {
 		return intent;
 	}
 	
-	private static String getReminderId(Schedule schedule) {
+	public static String getReminderId(Schedule schedule) {
 		return String.format("reminder://alarm#schedule=%d",
 				schedule.getCreateDate().getTime());
 	}

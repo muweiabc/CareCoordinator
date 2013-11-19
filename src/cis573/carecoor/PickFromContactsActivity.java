@@ -2,7 +2,6 @@ package cis573.carecoor;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,7 @@ import cis573.carecoor.bean.Contact;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.utils.Const;
 
-public class PickFromContactsActivity extends Activity {
+public class PickFromContactsActivity extends BannerActivity {
 
 	public static final String TAG = "PickFromContactsActivity";
 	
@@ -28,6 +27,7 @@ public class PickFromContactsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pick_from_contacts_activity);
+		setBannerTitle(R.string.title_contacts);
 		
 		initViews();
 		initContacts();

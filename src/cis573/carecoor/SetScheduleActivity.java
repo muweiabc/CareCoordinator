@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
@@ -37,7 +36,7 @@ import cis573.carecoor.reminder.ReminderCenter;
 import cis573.carecoor.utils.Const;
 import cis573.carecoor.utils.Utils;
 
-public class SetScheduleActivity extends Activity {
+public class SetScheduleActivity extends BannerActivity {
 
 	public static final String TAG = "SetScheduleActivity";
 	
@@ -66,6 +65,7 @@ public class SetScheduleActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		mMedicine = (Medicine) getIntent().getSerializableExtra(Const.EXTRA_MEDICINE);
 		setContentView(R.layout.set_schedule_activity);
+		setBannerTitle(R.string.title_new_schedule);
 		
 		initViews();
 		initTakeTimeGrid();

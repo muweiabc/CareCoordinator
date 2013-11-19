@@ -2,23 +2,22 @@ package cis573.carecoor;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.utils.Const;
 
-public class ChooseMedActivity extends Activity {
+public class ChooseMedActivity extends BannerActivity {
 
 	public static final String TAG = "ChooseMedActivity";
 	
@@ -29,6 +28,7 @@ public class ChooseMedActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.choose_med_activity);
+		setBannerTitle(R.string.title_new_schedule);
 		initViews();
 	}
 	

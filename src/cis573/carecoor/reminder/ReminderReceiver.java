@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import cis573.carecoor.R;
 import cis573.carecoor.TakeMedicineActivity;
@@ -29,7 +30,6 @@ public class ReminderReceiver extends BroadcastReceiver {
 	
 	private void showNotification(Context context, Schedule schedule) {
 		String medName = "";
-//		String plannedStr = "";
 		Medicine med = null;
 		if(schedule != null) {
 			med = schedule.getMedicine();
@@ -37,9 +37,6 @@ public class ReminderReceiver extends BroadcastReceiver {
 		if(med != null) {
 			medName = med.getName();
 		}
-//		if(planned >= 0) {
-//			plannedStr = Utils.get12ClockTime(planned);
-//		}
 		String text = context.getString(R.string.reminder_text, medName);
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 		.setTicker(context.getString(R.string.reminder_ticker))
@@ -50,8 +47,9 @@ public class ReminderReceiver extends BroadcastReceiver {
 		.setAutoCancel(true);
 		
 		Intent newIntent = new Intent(context, TakeMedicineActivity.class);
+		newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		newIntent.setData(Uri.parse(ReminderCenter.getReminderId(schedule)));
 		newIntent.putExtra(Const.EXTRA_SCHEDULE, schedule);
-		newIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		PendingIntent pIntent = PendingIntent.getActivity(context, 0, newIntent, 0);
 		builder.setContentIntent(pIntent);
 		

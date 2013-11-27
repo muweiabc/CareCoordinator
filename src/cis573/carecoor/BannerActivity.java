@@ -13,6 +13,8 @@ import android.telephony.SmsManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,13 +30,23 @@ public class BannerActivity extends FragmentActivity {
 	private Button mBtnAlert;
 	private AlertDialog mAlertCfmDialog;
 	private AlertDialog mAlertSecDialog;
+	private Animation mAnimTitleIn;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		initDialogs();
+		mAnimTitleIn = AnimationUtils.loadAnimation(this, R.anim.title_in);
 	}
 	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		if(mTvTitle != null) {
+			mTvTitle.startAnimation(mAnimTitleIn);
+		}
+	}
+
 	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		Logger.i(TAG, String.format("Back from call, request=%d, result=%d", arg0, arg1));

@@ -13,4 +13,6 @@ public class Const {
 	public static final String EXTRA_TIME = "cis573.carecoor.time";
 	
 	public static final String ACTION_REMINDER_ALARM = "cis573.carecoor.reminder.alarm";
+	
+	public static final String URI_FEEDBACK_MARKET = "market://details?id=";
 }

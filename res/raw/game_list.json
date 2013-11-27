@@ -1,0 +1,10 @@
+[{
+	"name": "Fruit Ninja",
+	"pkg_name": ["com.halfbrick.fruitninjafree", "com.halfbrick.fruitninja"],
+	"icon": "game_fruitninja"
+},
+{
+	"name": "Angry Birds",
+	"pkg_name": ["com.rovio.angrybirds"],
+	"icon": "game_angrybirds"
+}]

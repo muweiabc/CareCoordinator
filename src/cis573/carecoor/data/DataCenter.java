@@ -3,11 +3,18 @@ package cis573.carecoor.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.content.Context;
+import cis573.carecoor.R;
 import cis573.carecoor.bean.Contact;
+import cis573.carecoor.bean.Game;
 import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.bean.TakeRecord;
 import cis573.carecoor.utils.FileKit;
+import cis573.carecoor.utils.Logger;
+import cis573.carecoor.utils.ResourceKit;
 
 public class DataCenter {
 
@@ -24,6 +31,7 @@ public class DataCenter {
 	private static List<Contact> mUserContacts = null;
 	private static List<Schedule> mSchedules = null;
 	private static List<TakeRecord> mTakeRecords = null;
+	private static List<Game> mGames = null;
 	
 	public static List<Contact> getUsefulContacts(Context context) {
 		if(mUsefulContacts == null) {
@@ -67,6 +75,8 @@ public class DataCenter {
 		}
 	}
 	
+	/****************** Schedules *********************/
+	
 	public static List<Schedule> getSchedules(Context context) {
 		if(mSchedules == null) {
 			mSchedules = (List<Schedule>) FileKit.readObject(context, FILENAME_SCHEDULES);
@@ -104,6 +114,8 @@ public class DataCenter {
 		return mSchedules.indexOf(schedule);
 	}
 	
+	/****************** Take Records *********************/
+	
 	public static List<TakeRecord> getTakeRecords(Context context) {
 		if(mTakeRecords == null) {
 			mTakeRecords = (List<TakeRecord>) FileKit.readObject(context, FILENAME_TAKE_RECORD);
@@ -120,5 +132,19 @@ public class DataCenter {
 		}
 		mTakeRecords.add(0, record);
 		FileKit.saveObject(context, FILENAME_TAKE_RECORD, mTakeRecords);
+	}
+	
+	/****************** Games *********************/
+	
+	public static List<Game> getGames(Context context) {
+		if(mGames == null) {
+			String json = ResourceKit.readAsString(context, R.raw.game_list);
+			try {
+				mGames = JsonFactory.parseGameList(new JSONArray(json));
+			} catch (JSONException e) {
+				Logger.e(TAG, e.getMessage(), e);
+			}
+		}
+		return mGames;
 	}
 }

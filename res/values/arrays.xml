@@ -7,7 +7,6 @@
         <item>History</item>
         <item>Friends</item>
         <item>Games</item>
-        <item>More</item>
     </string-array>
     <string-array name="contact_group_items">
         <item>Useful Contacts</item>

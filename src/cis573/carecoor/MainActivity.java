@@ -48,7 +48,7 @@ public class MainActivity extends BannerActivity
 
 		@Override
 		public Fragment getItem(int arg0) {
-			Fragment f;
+			Fragment f = null;
 			if(arg0 == 0) {	// Alert
 				f = new AlertConfFragment();
 			} else if(arg0 == 1) {	// Contact
@@ -59,9 +59,11 @@ public class MainActivity extends BannerActivity
 				f = new HistoryFragment();	
 			} else if(arg0 == 4) {	// Friends
 				f = new FriendsFragment();
-			} else {
+			} else if(arg0 == 5) {	// Games
+				f = new GameFragment();
+			}/*{
 				f = DummyFragment.newInstance(mPageTitles[arg0]);
-			}
+			}*/
 			return f;
 		}
 

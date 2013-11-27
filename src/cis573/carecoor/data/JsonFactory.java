@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import cis573.carecoor.bean.Game;
 import cis573.carecoor.bean.Medicine;
 
 public class JsonFactory {
@@ -38,6 +39,41 @@ public class JsonFactory {
 		Medicine item;
 		for(int i = 0; i < size; i++) {
 			item = parseMedicine(array.optJSONObject(i));
+			if(item != null) {
+				list.add(item);
+			}
+		}
+		return list;
+	}
+	
+	public static Game parseGame(JSONObject json) {
+		if(json == null) {
+			return null;
+		}
+		Game item = new Game();
+		item.setName(json.optString("name"));
+		JSONArray pkgs = json.optJSONArray("pkg_name");
+		if(pkgs != null) {
+			final int size = pkgs.length();
+			String[] pkgNames = new String[size];
+			for(int i = 0; i < size; i++) {
+				pkgNames[i] = pkgs.optString(i);
+			}
+			item.setPackageNames(pkgNames);
+		}
+		item.setIcon(json.optString("icon"));
+		return item;
+	}
+	
+	public static List<Game> parseGameList(JSONArray array) {
+		if(array == null) {
+			return null;
+		}
+		final int size = array.length();
+		List<Game> list = new ArrayList<Game>(size);
+		Game item;
+		for(int i = 0; i < size; i++) {
+			item = parseGame(array.optJSONObject(i));
 			if(item != null) {
 				list.add(item);
 			}

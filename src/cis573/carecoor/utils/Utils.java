@@ -3,21 +3,23 @@ package cis573.carecoor.utils;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import cis573.carecoor.bean.Schedule.Time;
 
-import android.content.Context;
-
 public class Utils {
+	
+	public static final String TAG = "Utils";
 	
 	private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("M/d/yyyy", Locale.US);
 	private static final SimpleDateFormat mTimeFormat = new SimpleDateFormat("h:mm a", Locale.US);
 	private static final SimpleDateFormat mDateTimeFormat = new SimpleDateFormat("M/d/yyyy h:mm a", Locale.US);
-
-	public static void callPhone(Context context, String number) {
-		
-	}
 	
 	public static String getWeekNameShort(int week) {
 		switch(week) {
@@ -102,5 +104,32 @@ public class Utils {
 		Calendar cal = Calendar.getInstance(Locale.US);
 		cal.setTime(date);
 		return new Time(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+	}
+	
+	public static boolean isPackageInstalled(Context context, String pkgName) {
+		PackageManager pm = context.getPackageManager();
+		List<ApplicationInfo> apps = pm.getInstalledApplications(0);
+		for(ApplicationInfo app : apps) {
+			if(app.packageName.equals(pkgName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void goToMarket(Context context, String pkgName) {
+		String url = Const.URI_FEEDBACK_MARKET + pkgName;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(url));
+		context.startActivity(intent);
+	}
+	
+	public static void launchApp(Context context, String pkgName) {
+		try {
+			Intent intent = context.getPackageManager().getLaunchIntentForPackage(pkgName);
+			context.startActivity(intent);
+		} catch(Exception e) {
+			Logger.e(TAG, e.getMessage(), e);
+		}
 	}
 }

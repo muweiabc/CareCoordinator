@@ -138,4 +138,9 @@
     <string name="reminder_title">Medicine Reminder</string>
     <string name="reminder_ticker">Time to take your medicine!</string>
     <string name="reminder_text">Take medicine: %1$s</string>
+    
+    <!-- Games -->
+    <string name="games_installed">Installed</string>
+    <string name="dialog_game_market">You haven\'t installed this game. Would you like to go to the market to download it?</string>
+    <string name="dialog_game_launch">Launch this game?</string>
 </resources>

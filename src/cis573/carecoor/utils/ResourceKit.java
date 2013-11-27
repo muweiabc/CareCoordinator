@@ -34,4 +34,8 @@ public class ResourceKit {
 		}
 		return sb.toString();
 	}
+	
+	public static int getDrawableResIdByName(Context context, String name) {
+		return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+	}
 }

@@ -80,6 +80,7 @@
     <string name="cancel">Cancel</string>
     <string name="back">Back</string>
 
+    <!-- New Schedule -->
     <string name="title_new_schedule">New Schedule</string>
     <string name="set_schedule_title">Set medicine schedule:</string>
     <string name="set_schedule_med_info">Medicine Info</string>
@@ -139,6 +140,21 @@
     <string name="reminder_ticker">Time to take your medicine!</string>
     <string name="reminder_text">Take medicine: %1$s</string>
     
+    <!-- Appointment -->
+	<string name="appointment_empty">No appointment</string>
+	<string name="btn_appointment_new">New Appointment</string>
+	<string name="title_appointment_new">New Appointment</string>
+    <string name="appointment_new_date">Date</string>
+    <string name="appointment_new_time">Time</string>
+    <string name="appointment_detail">Detail</string>
+    <string name="appointment_detail_hint">Appointment Detail</string>
+    <string name="appointment_status_1day">1 day</string>
+    <string name="appointment_status_days">%d days</string>
+    <string name="appointment_status_today">Today</string>
+    <string name="appointment_status_passed">Passed</string>
+    <string name="dialog_title_remove_appointment">Remove</string>
+    <string name="msg_remove_appointment">Remove this appointment?</string>
+	
     <!-- Games -->
     <string name="games_installed">Installed</string>
     <string name="dialog_game_market">You haven\'t installed this game. Would you like to go to the market to download it?</string>

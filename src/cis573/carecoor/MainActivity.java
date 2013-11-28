@@ -57,9 +57,11 @@ public class MainActivity extends BannerActivity
 				f = new MedScheduleFragment();
 			} else if(arg0 == 3) {	// History
 				f = new HistoryFragment();	
-			} else if(arg0 == 4) {	// Friends
+			} else if(arg0 == 4) {	// Appointment
+				f = new AppointmentFragment();
+			} else if(arg0 == 5) {	// Friends
 				f = new FriendsFragment();
-			} else if(arg0 == 5) {	// Games
+			} else if(arg0 == 6) {	// Games
 				f = new GameFragment();
 			}/*{
 				f = DummyFragment.newInstance(mPageTitles[arg0]);

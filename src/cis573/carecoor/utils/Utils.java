@@ -17,6 +17,7 @@ public class Utils {
 	
 	public static final String TAG = "Utils";
 	
+	private static final long ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
 	private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("M/d/yyyy", Locale.US);
 	private static final SimpleDateFormat mTimeFormat = new SimpleDateFormat("h:mm a", Locale.US);
 	private static final SimpleDateFormat mDateTimeFormat = new SimpleDateFormat("M/d/yyyy h:mm a", Locale.US);
@@ -131,5 +132,22 @@ public class Utils {
 		} catch(Exception e) {
 			Logger.e(TAG, e.getMessage(), e);
 		}
+	}
+	
+	public static int getDayDiffFromNow(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		
+		Calendar now = Calendar.getInstance();
+		now.set(Calendar.HOUR_OF_DAY, 0);
+		now.set(Calendar.MINUTE, 0);
+		now.set(Calendar.SECOND, 0);
+		now.set(Calendar.MILLISECOND, 0);
+		
+		return (int) ((cal.getTime().getTime() - now.getTime().getTime()) / ONE_DAY_MILLISECS);
 	}
 }

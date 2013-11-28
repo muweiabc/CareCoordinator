@@ -5,6 +5,7 @@
         <item>Contacts</item>
         <item>Reminder</item>
         <item>History</item>
+        <item>Appointment</item>
         <item>Friends</item>
         <item>Games</item>
     </string-array>

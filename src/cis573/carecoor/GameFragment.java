@@ -1,7 +1,5 @@
 package cis573.carecoor;
 
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import cis573.carecoor.adapter.CommonAdapter;
 import cis573.carecoor.bean.Game;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.utils.ResourceKit;
@@ -46,7 +44,7 @@ public class GameFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		mAdapter.setGameList(DataCenter.getGames(getActivity()));
+		mAdapter.setData(DataCenter.getGames(getActivity()));
 		mListView.setAdapter(mAdapter);
 	}
 	
@@ -119,32 +117,10 @@ public class GameFragment extends Fragment {
 		return null;
 	}
 
-	public static class GameAdapter extends BaseAdapter {
-
-		private Context mContext;
-		private List<Game> mGameList;
+	public static class GameAdapter extends CommonAdapter<Game> {
 
 		public GameAdapter(Context context) {
-			this.mContext = context;
-		}
-
-		public void setGameList(List<Game> gameList) {
-			this.mGameList = gameList;
-		}
-
-		@Override
-		public int getCount() {
-			return mGameList != null ? mGameList.size() : 0;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return mGameList != null ? mGameList.get(position) : null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
+			super(context);
 		}
 
 		@Override

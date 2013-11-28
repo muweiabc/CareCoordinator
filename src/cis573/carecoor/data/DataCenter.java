@@ -8,6 +8,7 @@ import org.json.JSONException;
 
 import android.content.Context;
 import cis573.carecoor.R;
+import cis573.carecoor.bean.Appointment;
 import cis573.carecoor.bean.Contact;
 import cis573.carecoor.bean.Game;
 import cis573.carecoor.bean.Schedule;
@@ -25,12 +26,14 @@ public class DataCenter {
 	private static final String FILENAME_DRUG_LISTS="drug_lists";
 	private static final String FILENAME_SCHEDULES="schedules";
 	private static final String FILENAME_TAKE_RECORD = "take_records";
+	private static final String FILENAME_APPOINTMENT = "appointments";
 	
 	private static List<Contact> mUsefulContacts = null;
 	private static List<Contact> mDrugs = null;
 	private static List<Contact> mUserContacts = null;
 	private static List<Schedule> mSchedules = null;
 	private static List<TakeRecord> mTakeRecords = null;
+	private static List<Appointment> mAppointments = null;
 	private static List<Game> mGames = null;
 	
 	public static List<Contact> getUsefulContacts(Context context) {
@@ -124,14 +127,38 @@ public class DataCenter {
 	}
 	
 	public static void addTakeRecord(Context context, TakeRecord record) {
-		if(mTakeRecords == null) {
-			mTakeRecords = (List<TakeRecord>) FileKit.readObject(context, FILENAME_TAKE_RECORD);
-		}
+		getTakeRecords(context);
 		if(mTakeRecords == null) {
 			mTakeRecords = new ArrayList<TakeRecord>();
 		}
 		mTakeRecords.add(0, record);
 		FileKit.saveObject(context, FILENAME_TAKE_RECORD, mTakeRecords);
+	}
+	
+	/****************** Appointment *********************/
+	
+	public static List<Appointment> getAppointments(Context context) {
+		if(mAppointments == null) {
+			mAppointments = (List<Appointment>) FileKit.readObject(context, FILENAME_APPOINTMENT);
+		}
+		return mAppointments;
+	}
+	
+	public static void addAppointments(Context context, Appointment appointment) {
+		getAppointments(context);
+		if(mAppointments == null) {
+			mAppointments = new ArrayList<Appointment>();
+		}
+		mAppointments.add(appointment);
+		FileKit.saveObject(context, FILENAME_APPOINTMENT, mAppointments);
+	}
+	
+	public static void removeAppointments(Context context, Appointment appointment) {
+		if(getAppointments(context) == null) {
+			return;
+		}
+		mAppointments.remove(appointment);
+		FileKit.saveObject(context, FILENAME_APPOINTMENT, mAppointments);
 	}
 	
 	/****************** Games *********************/

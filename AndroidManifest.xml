@@ -54,6 +54,7 @@
         </activity>
         <activity android:name="SetScheduleActivity" android:screenOrientation="portrait"/>
         <activity android:name="TakeMedicineActivity" android:screenOrientation="portrait"/>
+        <activity android:screenOrientation="portrait" android:name="NewAppointmentActivity" android:windowSoftInputMode="stateHidden"/>
         <receiver android:name=".reminder.ReminderReceiver">
             <intent-filter>
                 <action android:name="cis573.carecoor.reminder.alarm"/>
@@ -65,7 +66,5 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        
     </application>
-
 </manifest>

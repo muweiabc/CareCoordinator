@@ -5,12 +5,15 @@ import java.util.Locale;
 
 import cis573.carecoor.bean.Appointment;
 import cis573.carecoor.data.DataCenter;
+import cis573.carecoor.reminder.ReminderCenter;
 import cis573.carecoor.utils.Utils;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -24,11 +27,15 @@ public class NewAppointmentActivity extends BannerActivity {
 	
 	private TextView mTvDate;
 	private TextView mTvTime;
+	private TextView mTvRemind;
 	private EditText mEtDetail;
 	
 	private Calendar mCalendar;
 	private DatePickerDialog mDatePickerDialog;
 	private TimePickerDialog mTimePickerDialog;
+	private AlertDialog mRemindDialog;
+	private String[] mRemindOptions;
+	private int mRemind = 0;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -43,9 +50,12 @@ public class NewAppointmentActivity extends BannerActivity {
 	private void initViews() {
 		mTvDate = (TextView) findViewById(R.id.new_appointment_date_text);
 		mTvTime = (TextView) findViewById(R.id.new_appointment_time_text);
+		mTvRemind = (TextView) findViewById(R.id.new_appointment_remind_text);
 		mEtDetail = (EditText) findViewById(R.id.new_appointment_detail);
 		mTvDate.setText(Utils.getDateString(mCalendar.getTime()));
 		mTvTime.setText(Utils.getTimeString(mCalendar.getTime()));
+		mRemindOptions = getResources().getStringArray(R.array.appointment_remind_options);
+		mTvRemind.setText(mRemindOptions[mRemind]);
 	}
 
 	private void initCalendar() {
@@ -74,6 +84,16 @@ public class NewAppointmentActivity extends BannerActivity {
 				mTvTime.setText(Utils.getTimeString(mCalendar.getTime()));
 			}
 		}, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), false);
+		
+		mRemindDialog = new AlertDialog.Builder(this)
+		.setTitle(R.string.appointment_new_remind)
+		.setItems(R.array.appointment_remind_options, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				mRemind = which;
+				mTvRemind.setText(mRemindOptions[mRemind]);
+			}
+		}).create();
 	}
 
 	public void onItemClick(View v) {
@@ -82,6 +102,8 @@ public class NewAppointmentActivity extends BannerActivity {
 			mDatePickerDialog.show();
 		} else if(id == R.id.new_appointment_time) {
 			mTimePickerDialog.show();
+		} else if(id == R.id.new_appointment_remind) {
+			mRemindDialog.show();
 		}
 	}
 	
@@ -90,8 +112,10 @@ public class NewAppointmentActivity extends BannerActivity {
 		Appointment appointment = new Appointment();
 		appointment.setDate(mCalendar.getTime());
 		appointment.setDetail(detail);
+		appointment.setRemind(mRemind);
 		
 		DataCenter.addAppointments(NewAppointmentActivity.this, appointment);
+		ReminderCenter.addReminder(this, appointment);
 		setResult(RESULT_OK);
 		finish();
 	}

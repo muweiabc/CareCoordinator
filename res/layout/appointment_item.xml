@@ -19,6 +19,12 @@
 	        android:textSize="16sp" />
 	    
 	    <TextView
+	        android:id="@+id/appointment_remind_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/gray_text" />
+	    
+	    <TextView
 	        android:id="@+id/appointment_detail_text"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

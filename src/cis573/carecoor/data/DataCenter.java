@@ -161,6 +161,13 @@ public class DataCenter {
 		FileKit.saveObject(context, FILENAME_APPOINTMENT, mAppointments);
 	}
 	
+	public static int getAppointmentId(Context context, Appointment appointment) {
+		if(getAppointments(context) == null) {
+			return -1;
+		}
+		return mAppointments.indexOf(appointment);
+	}
+	
 	/****************** Games *********************/
 	
 	public static List<Game> getGames(Context context) {

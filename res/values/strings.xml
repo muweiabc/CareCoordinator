@@ -15,7 +15,10 @@
     <string name="btn_alert">ALERT</string>
     <string name="btn_back">&lt;</string>
     <string name="dialog_alert_cfm_title">Alert</string>
-    <string name="dialog_alert_cfm">Make an alert call?</string>
+    <string name="dialog_alert_cfm_call_text">Make an alert call and Send a message?</string>
+    <string name="dialog_alert_cfm_call">Make an alert call?</string>
+    <string name="dialog_alert_cfm_text">Send a message?</string>
+    <string name="dialog_alert_cfm_none">Check at least one in Call and Text?</string>
     <string name="dialog_alert_secondary">Got helped? If not, you can choose to make an alert call to the primary or secondary number</string>
     <string name="dialog_alert_primary_again">Primary</string>
     <string name="dialog_alert_secondary_again">Secondary</string>

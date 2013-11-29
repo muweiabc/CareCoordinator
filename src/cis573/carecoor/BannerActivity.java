@@ -137,9 +137,9 @@ public class BannerActivity extends FragmentActivity {
 	}
 	
 	private void initDialogs() {
+		
 		mAlertCfmDialog = new AlertDialog.Builder(this)
 		.setTitle(R.string.dialog_alert_cfm_title)
-		.setMessage(R.string.dialog_alert_cfm)
 		.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -151,6 +151,7 @@ public class BannerActivity extends FragmentActivity {
 				return;
 			}
 		}).create();
+		
 		mAlertSecDialog = new AlertDialog.Builder(this)
 		.setTitle(R.string.dialog_alert_cfm_title)
 		.setMessage(R.string.dialog_alert_secondary)
@@ -179,9 +180,23 @@ public class BannerActivity extends FragmentActivity {
 		}
 	};
 
-	private OnClickListener onAlertClick = new OnClickListener() {
+	private OnClickListener onAlertClick = new OnClickListener() {		
 		@Override
 		public void onClick(View v) {
+			
+			boolean makeCall = PreferenceUtil.getEnableAlertCall(BannerActivity.this);
+			boolean makeText = PreferenceUtil.getEnableAlertText(BannerActivity.this);
+			
+			if(makeCall&&makeText){
+				mAlertCfmDialog.setMessage(getString(R.string.dialog_alert_cfm_call_text));
+			}else if(makeCall){
+				mAlertCfmDialog.setMessage(getString(R.string.dialog_alert_cfm_call));
+			}else if(makeText){
+				mAlertCfmDialog.setMessage(getString(R.string.dialog_alert_cfm_text));
+			}else{
+				mAlertCfmDialog.setMessage(getString(R.string.dialog_alert_cfm_none));
+			}
+			
 			mAlertCfmDialog.show();
 		}
 	};

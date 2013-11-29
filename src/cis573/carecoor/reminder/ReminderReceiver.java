@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import cis573.carecoor.R;
 import cis573.carecoor.TakeMedicineActivity;
+import cis573.carecoor.bean.Appointment;
 import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.data.DataCenter;
@@ -20,10 +21,18 @@ public class ReminderReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		if(Const.ACTION_REMINDER_ALARM.equals(intent.getAction())) {
-			Schedule schedule = (Schedule) intent.getSerializableExtra(Const.EXTRA_SCHEDULE);
-//			int planned = intent.getIntExtra(Const.EXTRA_PLANNED_HOUR, -1);
-			if(schedule != null) {
-				showNotification(context, schedule);
+			Uri data = intent.getData();
+			String type = data.getHost();
+			if("schedule".equals(type)) {
+				Schedule schedule = (Schedule) intent.getSerializableExtra(Const.EXTRA_SCHEDULE);
+				if(schedule != null) {
+					showNotification(context, schedule);
+				}
+			} else if("appointment".equals(type)) {
+				Appointment appointment = (Appointment) intent.getSerializableExtra(Const.EXTRA_APPOINTMENT);
+				if(appointment != null) {
+					showNotification(context, appointment);
+				}
 			}
 		}
 	}
@@ -55,5 +64,20 @@ public class ReminderReceiver extends BroadcastReceiver {
 		
 		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		manager.notify(DataCenter.getScheduleId(context, schedule), builder.build());
+	}
+	
+	private void showNotification(Context context, Appointment appointment) {
+		String detail = appointment.getDetail();
+		String text = context.getString(R.string.appointment_reminder, detail);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+		.setTicker(text)
+		.setContentTitle(context.getString(R.string.appointment_reminder_title))
+		.setContentText(detail)
+		.setSmallIcon(R.drawable.ic_launcher)
+		.setDefaults(Notification.DEFAULT_SOUND)
+		.setAutoCancel(true);
+		
+		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		manager.notify(DataCenter.getAppointmentId(context, appointment), builder.build());
 	}
 }

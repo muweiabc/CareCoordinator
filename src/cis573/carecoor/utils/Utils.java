@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import cis573.carecoor.bean.Appointment;
 import cis573.carecoor.bean.Schedule.Time;
 
 public class Utils {
@@ -149,5 +150,31 @@ public class Utils {
 		now.set(Calendar.MILLISECOND, 0);
 		
 		return (int) ((cal.getTime().getTime() - now.getTime().getTime()) / ONE_DAY_MILLISECS);
+	}
+	
+	public static Date getAppointmentRemindDate(Appointment appointment) {
+		if(appointment == null) {
+			return null;
+		}
+		/*<item>No</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>4 hours</item>
+        <item>12 hours</item>
+        <item>1 day</item>*/
+		
+		Calendar calendar = Calendar.getInstance(Locale.US);
+		calendar.setTime(appointment.getDate());
+		switch(appointment.getRemind()) {
+		case 0: return null;
+		case 1: calendar.add(Calendar.MINUTE, -30); break;
+		case 2: calendar.add(Calendar.HOUR_OF_DAY, -1); break;
+		case 3: calendar.add(Calendar.HOUR_OF_DAY, -2); break;
+		case 4: calendar.add(Calendar.HOUR_OF_DAY, -4); break;
+		case 5: calendar.add(Calendar.HOUR_OF_DAY, -12); break;
+		case 6: calendar.add(Calendar.DATE, -1); break;
+		}
+		return calendar.getTime();
 	}
 }

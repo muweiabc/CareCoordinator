@@ -149,6 +149,7 @@
 	<string name="title_appointment_new">New Appointment</string>
     <string name="appointment_new_date">Date</string>
     <string name="appointment_new_time">Time</string>
+    <string name="appointment_new_remind">Remind Before</string>
     <string name="appointment_detail">Detail</string>
     <string name="appointment_detail_hint">Appointment Detail</string>
     <string name="appointment_status_1day">1 day</string>
@@ -157,6 +158,10 @@
     <string name="appointment_status_passed">Passed</string>
     <string name="dialog_title_remove_appointment">Remove</string>
     <string name="msg_remove_appointment">Remove this appointment?</string>
+    <string name="appointment_reminder_title">Appointment Reminder</string>
+    <string name="appointment_reminder">Appointment reminder: %s</string>
+    <string name="appointment_item_remind">Remind: %s</string>
+    <string name="appointment_item_detail">Detail: %s</string>
 	
     <!-- Games -->
     <string name="games_installed">Installed</string>

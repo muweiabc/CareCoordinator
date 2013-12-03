@@ -53,12 +53,12 @@
     <string name="dialog_title_friends">Prompt</string>
     <string name="dialog_friends_facebook_page">Go to %s\'s facebook page?</string>
     <string name="deleteappt">Delete appointment</string>
-    
+
     <!-- Medicine Schedule -->
     <string name="medschedule_empty">No medicines are scheduled</string>
     <string name="medschedule_add">New Schedule</string>
+    <string name="medschedule_track">Track Medicine</string>
     <string name="medschedule_choose_med_title">Choose your medicine</string>
-    
     <string name="next">next</string>
     <string name="choose">Choose From Medicine List :</string>
     <string name="title_activity_add_reminder">Add Medicine</string>
@@ -102,19 +102,16 @@
     <string name="set_schedule_pick_days">Pick days</string>
     <string name="set_schedule_continuous">Coutinuous</string>
     <string name="set_schedule_setduration">Set duration</string>
-    
     <string name="dialog_title_error">Error</string>
     <string name="msg_no_take_hours">Please select at least 1 take time</string>
     <string name="msg_no_take_days">Please select at least 1 take day</string>
-    
     <string name="dialog_title_remove_schedule">Remove</string>
     <string name="msg_remove_schedule">Remove this schedule?</string>
-    
     <string name="schedule_state_no_today">No schedule today</string>
     <string name="schedule_state_ended">Schedule ended</string>
     <string name="schedule_state_next">&lt;font color=\"#f06d36\">Next time to take: %s&lt;/font></string>
     <string name="schedule_state_finished">&lt;font color=\"#00b050\">Today\'s schedule finished&lt;/font></string>
-    
+
     <!-- Take medicine -->
     <string name="title_take_medicine">Take Medicine</string>
     <string name="take_medicine_schedule_info">Schedule Info</string>
@@ -129,24 +126,21 @@
     <string name="not_taken">Not taken</string>
     <string name="taken_at">Taken at %s</string>
     <string name="take_medicine_schedule_today">Today\'s schedule:</string>
-    
     <string name="dialog_title_take_med">Take Medicine</string>
     <string name="dialog_msg_take_med">Are you sure?</string>
-    
     <string name="history_empty">No medicine history</string>
     <string name="history_taken_at">Taken at: %s</string>
     <string name="history_planned">Planned take time: %s</string>
     <string name="history_ontime">On time</string>
     <string name="history_late">Late for %s</string>
-    
     <string name="reminder_title">Medicine Reminder</string>
     <string name="reminder_ticker">Time to take your medicine!</string>
     <string name="reminder_text">Take medicine: %1$s</string>
-    
+
     <!-- Appointment -->
-	<string name="appointment_empty">No appointment</string>
-	<string name="btn_appointment_new">New Appointment</string>
-	<string name="title_appointment_new">New Appointment</string>
+    <string name="appointment_empty">No appointment</string>
+    <string name="btn_appointment_new">New Appointment</string>
+    <string name="title_appointment_new">New Appointment</string>
     <string name="appointment_new_date">Date</string>
     <string name="appointment_new_time">Time</string>
     <string name="appointment_new_remind">Remind Before</string>
@@ -162,9 +156,13 @@
     <string name="appointment_reminder">Appointment reminder: %s</string>
     <string name="appointment_item_remind">Remind: %s</string>
     <string name="appointment_item_detail">Detail: %s</string>
-	
+
     <!-- Games -->
     <string name="games_installed">Installed</string>
     <string name="dialog_game_market">You haven\'t installed this game. Would you like to go to the market to download it?</string>
     <string name="dialog_game_launch">Launch this game?</string>
+    <string name="title_activity_track">Track</string>
+
+	<!-- Track -->
+	<string name="track">Track Medicine</string>
 </resources>

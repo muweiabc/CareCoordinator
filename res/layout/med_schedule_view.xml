@@ -10,25 +10,29 @@
         android:layout_weight="1" >
 
         <ListView
-            android:id="@+id/appointment_list"
+            android:id="@+id/med_schedule_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/appointment_empty"
+            android:id="@+id/med_schedule_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/appointment_empty"
+            android:text="@string/medschedule_empty"
             android:textColor="@android:color/darker_gray"
             android:textSize="32sp" />
     </FrameLayout>
-
-    <Button
-        android:id="@+id/appointment_add_button"
+	<Button
+        android:id="@+id/med_schedule_track_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_appointment_new" />
+        android:text="@string/medschedule_track" />
+    <Button
+        android:id="@+id/med_schedule_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/medschedule_add" />
 
 </LinearLayout>

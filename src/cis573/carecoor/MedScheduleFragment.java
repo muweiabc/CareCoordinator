@@ -40,15 +40,18 @@ public class MedScheduleFragment extends Fragment {
 	private static final int REQUEST_TAKE = 1;
 
 	private Button mBtnNew;
+	private Button mBtnTrack;
 	private ListView mLvSchedules;
 	private ScheduleAdapter mAdapter = null;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.med_schdule_view, container, false);
+		View view = inflater.inflate(R.layout.med_schedule_view, container, false);
 		mBtnNew = (Button) view.findViewById(R.id.med_schedule_add_button);
 		mBtnNew.setOnClickListener(onNewClick);
+		mBtnNew = (Button) view.findViewById(R.id.med_schedule_track_button);
+		mBtnNew.setOnClickListener(onTrackClick);
 		mLvSchedules = (ListView) view.findViewById(R.id.med_schedule_list);
 		mLvSchedules.setOnItemClickListener(onScheduleItemClick);
 		mLvSchedules.setOnItemLongClickListener(onScheduleItemLongClick);
@@ -119,6 +122,14 @@ public class MedScheduleFragment extends Fragment {
 		public void onClick(View v) {
 			Intent intent = new Intent(getActivity(), ChooseMedActivity.class);
 			startActivityForResult(intent, REQUEST_NEW_SCHEDULE);
+		}
+	};
+	
+	private OnClickListener onTrackClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(getActivity(), TrackActivity.class);
+			startActivity(intent);
 		}
 	};
 	

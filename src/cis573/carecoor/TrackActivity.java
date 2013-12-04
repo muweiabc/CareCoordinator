@@ -33,7 +33,7 @@ public class TrackActivity extends BannerActivity {
 		trackLayout=(LinearLayout)findViewById(R.id.track_layout);
 		
 		graph=ChartFactory.getLineChartView(this, getDemoDataset(), getDemoRenderer());
-		graph.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+		graph.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 		trackLayout.addView(graph);
 		
 	}
@@ -44,40 +44,53 @@ public class TrackActivity extends BannerActivity {
 
 	 private XYMultipleSeriesDataset getDemoDataset() {
 		    XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-		    final int nr = 10;
+		    final int nr = 7;
 		    Random r = new Random();
-		    for (int i = 0; i < 2; i++) {
-		      XYSeries series = new XYSeries("Demo series " + (i + 1));
+		    
+		      XYSeries series = new XYSeries("Medicine Compliance");
 		      for (int k = 0; k < nr; k++) {
-		        series.add(k, 20 + r.nextInt() % 100);
+		        series.add((double)k,(double)k/10+0.1);
 		      }
 		      dataset.addSeries(series);
-		    }
+		    
 		    return dataset;
 		  }
 	
 	 private XYMultipleSeriesRenderer getDemoRenderer() {
 		    XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
-		    renderer.setAxisTitleTextSize(16);
+		    renderer.setBackgroundColor(Color.YELLOW);
+		    renderer.setAxisTitleTextSize(30);
 		    renderer.setChartTitleTextSize(20);
-		    renderer.setLabelsTextSize(15);
-		    renderer.setLegendTextSize(15);
+		    renderer.setLabelsTextSize(30);
+		    renderer.setLegendTextSize(30);
 		    renderer.setPointSize(5f);
-		    renderer.setMargins(new int[] {20, 30, 15, 0});
+		    renderer.setMargins(new int[] {50, 50,50, 50});
+		    renderer.setMarginsColor(Color.LTGRAY);
+		    renderer.setGridColor(Color.YELLOW);
+		    
+		    renderer.setXLabels(7);
+		    renderer.setYAxisMin(0.0);
+		    renderer.setYAxisMax(1.0);
+		    renderer.setXAxisMin(0);
+		    renderer.setXAxisMax(6);
+		    
+		    
 		    XYSeriesRenderer r = new XYSeriesRenderer();
 		    r.setColor(Color.BLUE);
-		    r.setPointStyle(PointStyle.SQUARE);
+		    r.setPointStyle(PointStyle.CIRCLE);
 		    //r.setFillBelowLine(true);
 		    //r.setFillBelowLineColor(Color.WHITE);
 		    r.setFillPoints(true);
+		    
 		    renderer.addSeriesRenderer(r);
+		    /*
 		    r = new XYSeriesRenderer();
-		    r.setPointStyle(PointStyle.CIRCLE);
+		    r.setPointStyle(PointStyle.SQUARE);
 		    r.setColor(Color.GREEN);
 		    r.setFillPoints(true);
 		    renderer.addSeriesRenderer(r);
 		    renderer.setAxesColor(Color.DKGRAY);
-		    renderer.setLabelsColor(Color.LTGRAY);
+		    renderer.setLabelsColor(Color.LTGRAY);*/
 		    return renderer;
 		  }
 }

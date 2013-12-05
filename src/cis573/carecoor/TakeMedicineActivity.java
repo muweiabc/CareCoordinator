@@ -8,9 +8,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 import cis573.carecoor.bean.Medicine;
 import cis573.carecoor.bean.Schedule;
 import cis573.carecoor.bean.Schedule.Time;
@@ -34,9 +37,10 @@ public class TakeMedicineActivity extends BannerActivity {
 	private TextView mTvScheduleStatus;
 	private LinearLayout mStatusLayout;
 	private Button mBtnTake;
+	private ToggleButton mTbTracking;
 	
 	private Schedule mSchedule;
-	private boolean mTaken = false;
+	private boolean mChanged = false;
 	private Time mNextTime = null;
 	
 	@Override
@@ -64,11 +68,12 @@ public class TakeMedicineActivity extends BannerActivity {
 		mTvScheduleStatus = (TextView) findViewById(R.id.take_medicine_schedule_status);
 		mStatusLayout = (LinearLayout) findViewById(R.id.take_medicine_status_layout);
 		mBtnTake = (Button) findViewById(R.id.take_medicine_take_btn);
+		mTbTracking = (ToggleButton) findViewById(R.id.take_medicine_tracking);
 	}
 	
 	@Override
 	public void onBackPressed() {
-		if(mTaken) {
+		if(mChanged) {
 			setResult(RESULT_OK);
 		}
 		super.onBackPressed();
@@ -137,6 +142,9 @@ public class TakeMedicineActivity extends BannerActivity {
 		sb.append(getString(R.string.take_medicine_duration, durationStr));
 		
 		mTvScheduleInfo.setText(sb.toString());
+		
+		mTbTracking.setChecked(mSchedule.isTracking());
+		mTbTracking.setOnCheckedChangeListener(onTrackingChanged);
 	}
 	
 	private void showScheduleStatus() {
@@ -186,6 +194,15 @@ public class TakeMedicineActivity extends BannerActivity {
 			}
 		}
 	}
+	
+	private OnCheckedChangeListener onTrackingChanged = new OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			mSchedule.setTracking(isChecked);
+			DataCenter.saveSchedule(TakeMedicineActivity.this, mSchedule);
+			mChanged = true;
+		}
+	};
 
 	public void onTakeClick(View v) {
 		new AlertDialog.Builder(TakeMedicineActivity.this)
@@ -199,7 +216,7 @@ public class TakeMedicineActivity extends BannerActivity {
 				DataCenter.addTakeRecord(TakeMedicineActivity.this, record);
 				ReminderCenter.addNextReminder(TakeMedicineActivity.this, mSchedule);
 				showScheduleStatus();
-				mTaken = true;
+				mChanged = true;
 			}
 		}).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 			@Override

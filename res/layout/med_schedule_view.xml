@@ -24,15 +24,25 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="32sp" />
     </FrameLayout>
-	<Button
-        android:id="@+id/med_schedule_track_button"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/medschedule_track" />
-    <Button
-        android:id="@+id/med_schedule_add_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/medschedule_add" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/med_schedule_add_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/medschedule_add" />
+
+        <Button
+            android:id="@+id/med_schedule_track_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/medschedule_track" />
+    </LinearLayout>
 
 </LinearLayout>

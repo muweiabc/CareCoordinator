@@ -11,7 +11,7 @@ public class Schedule implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8354327699584768411L;
+	private static final long serialVersionUID = 3425227164092067303L;
 
 	public static final String TAG = "Schedule";
 	
@@ -21,6 +21,7 @@ public class Schedule implements Serializable {
 	private List<Time> times;
 	private List<Integer> days;
 	private int duration;
+	private boolean tracking;
 	
 	public Schedule(Date createDate) {
 		this.createDate = createDate;
@@ -60,6 +61,12 @@ public class Schedule implements Serializable {
 	}
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	public boolean isTracking() {
+		return tracking;
+	}
+	public void setTracking(boolean tracking) {
+		this.tracking = tracking;
 	}
 	
 	@Override

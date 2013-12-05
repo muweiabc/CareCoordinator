@@ -319,6 +319,7 @@ public class SetScheduleActivity extends BannerActivity {
 		} else if(mRgDuration.getCheckedRadioButtonId() == R.id.set_schedule_setduration) {
 			schedule.setDuration(Integer.parseInt(mEtDuration.getText().toString()));
 		}
+		schedule.setTracking(true);
 		
 		DataCenter.addSchedule(SetScheduleActivity.this, schedule);
 		ReminderCenter.addNextReminder(SetScheduleActivity.this, schedule);

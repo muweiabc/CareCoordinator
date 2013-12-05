@@ -169,6 +169,7 @@ public class MedScheduleFragment extends Fragment {
 				vh = new ViewHolder();
 				vh.name = (TextView) convertView.findViewById(R.id.schedule_item_name);
 				vh.state = (TextView) convertView.findViewById(R.id.schedule_item_status);
+				vh.tracking = (TextView) convertView.findViewById(R.id.schedule_item_tracking);
 				vh.image = (ImageView) convertView.findViewById(R.id.schedule_item_image);
 				convertView.setTag(vh);
 			} else {
@@ -193,6 +194,11 @@ public class MedScheduleFragment extends Fragment {
 						vh.state.setText(Html.fromHtml(finished));
 					}
 				}
+				if(item.isTracking()) {
+					vh.tracking.setVisibility(View.VISIBLE);
+				} else {
+					vh.tracking.setVisibility(View.GONE);
+				}
 				med = item.getMedicine();
 				if(med != null) {
 					vh.name.setText(med.getName());
@@ -205,6 +211,7 @@ public class MedScheduleFragment extends Fragment {
 		private static class ViewHolder {
 			TextView name;
 			TextView state;
+			TextView tracking;
 			ImageView image;
 		}
 	}

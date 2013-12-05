@@ -176,6 +176,7 @@ public class BannerActivity extends FragmentActivity {
 	private OnClickListener onBackClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
+			onBackPressed();
 			finish();
 		}
 	};

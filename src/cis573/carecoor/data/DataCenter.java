@@ -110,6 +110,16 @@ public class DataCenter {
 		FileKit.saveObject(context, FILENAME_SCHEDULES, mSchedules);
 	}
 	
+	public static void saveSchedule(Context context, Schedule schedule) {
+		if(getSchedules(context) == null) {
+			return;
+		}
+		int id = mSchedules.indexOf(schedule);
+		mSchedules.remove(id);
+		mSchedules.add(id, schedule);
+		FileKit.saveObject(context, FILENAME_SCHEDULES, mSchedules);
+	}
+	
 	public static int getScheduleId(Context context, Schedule schedule) {
 		if(getSchedules(context) == null) {
 			return -1;

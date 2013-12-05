@@ -1,6 +1,8 @@
 package cis573.carecoor;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,8 +30,10 @@ import cis573.carecoor.bean.Schedule.Time;
 import cis573.carecoor.data.DataCenter;
 import cis573.carecoor.data.MedicineCenter;
 import cis573.carecoor.data.ScheduleCenter;
+import cis573.carecoor.data.ScheduleCenter.Conformity;
 import cis573.carecoor.reminder.ReminderCenter;
 import cis573.carecoor.utils.Const;
+import cis573.carecoor.utils.Logger;
 import cis573.carecoor.utils.Utils;
 
 public class MedScheduleFragment extends Fragment {
@@ -128,6 +132,8 @@ public class MedScheduleFragment extends Fragment {
 	private OnClickListener onTrackClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
+			Map<Date, Conformity> map = ScheduleCenter.getOverallConformity(getActivity());
+			Logger.i(TAG, "get");
 			Intent intent = new Intent(getActivity(), TrackActivity.class);
 			startActivity(intent);
 		}

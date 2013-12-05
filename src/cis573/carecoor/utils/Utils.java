@@ -156,14 +156,6 @@ public class Utils {
 		if(appointment == null) {
 			return null;
 		}
-		/*<item>No</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>2 hours</item>
-        <item>4 hours</item>
-        <item>12 hours</item>
-        <item>1 day</item>*/
-		
 		Calendar calendar = Calendar.getInstance(Locale.US);
 		calendar.setTime(appointment.getDate());
 		switch(appointment.getRemind()) {

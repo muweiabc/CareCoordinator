@@ -2,9 +2,12 @@ package cis573.carecoor.data;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 import android.content.Context;
 import cis573.carecoor.bean.Schedule;
@@ -126,5 +129,101 @@ public class ScheduleCenter {
 		end.add(Calendar.DATE, after);
 		end.add(Calendar.SECOND, -1);	// Ended at 23:59:59 the previous day
 		return end.getTime();
+	}
+	
+	/**
+	 * Get overall conformity of all tracking schedules
+	 * @param context
+	 * @return
+	 */
+	public static Map<Date, Conformity> getOverallConformity(Context context) {
+		List<Schedule> schedules = DataCenter.getSchedules(context);
+		if(schedules == null) {
+			return null;
+		}
+		Map<Date, Conformity> map = new TreeMap<Date, Conformity>();
+		Date startDate = null;	// Get the earliest create date among all schedules
+		for(Schedule schedule : schedules) {
+			if(!schedule.isTracking()) {
+				continue;
+			}
+			if(startDate == null || schedule.getCreateDate().before(startDate)) {
+				startDate = schedule.getCreateDate();
+			}
+		}
+		Calendar now = Calendar.getInstance(Locale.US);
+		setBeginningOfDay(now);
+		Calendar calendar = Calendar.getInstance(Locale.US);
+		calendar.setTime(startDate);
+		setBeginningOfDay(calendar);
+		while(!calendar.after(now)) {
+			int taken = 0;
+			int planned = 0;
+			for(Schedule schedule : schedules) {
+				if(!schedule.isTracking()) {	// Not tracking
+					continue;
+				}
+				int plannedThis = getPlannedCount(schedule, calendar);
+				if(plannedThis != 0) {
+					planned += plannedThis;
+					List<TakeRecord> records = getDayTakeRecordsForSchedule(context, schedule, calendar.getTime());
+					if(records != null) {
+						taken += records.size();
+					}
+				}
+			}
+			if(planned != 0) {
+				map.put(calendar.getTime(), new Conformity(taken, planned));
+			}
+			calendar.add(Calendar.DATE, 1);
+		}
+		return map;
+	}
+	
+	/**
+	 * Get how many times that is planned to take medicine for the schedule at a date
+	 * @param schedule
+	 * @param calendar
+	 * @return
+	 */
+	private static int getPlannedCount(Schedule schedule, Calendar calendar) {
+		Date now = new Date();
+		if(schedule.getDuration() > 0) {	// Has duration
+			Date end = getEndOfDaysAfter(schedule.getCreateDate(), schedule.getDuration());
+			if(end != null && end.before(now)) {	// Has ended
+				return 0;
+			}
+		}
+		List<Integer> days = schedule.getDays();
+		if(days != null) {	// Has days
+			if(!days.contains(calendar.get(Calendar.DAY_OF_WEEK))) {	// No schedule that day
+				return 0;
+			}
+		}
+		return schedule.getTimes().size();
+	}
+	
+	private static void setBeginningOfDay(Calendar cal) {
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+	}
+	
+	public static class Conformity {
+		public final int taken;
+		public final int planned;
+		
+		public Conformity(int taken, int planned) {
+			this.taken = taken;
+			this.planned = planned;
+		}
+		
+		public double getConformity() {
+			if(planned == 0) {
+				return 0;
+			}
+			return (double) taken / (double) planned;
+		}
 	}
 }

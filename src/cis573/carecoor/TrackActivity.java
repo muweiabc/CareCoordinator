@@ -1,26 +1,25 @@
 package cis573.carecoor;
 
-import java.util.Random;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalActivity;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
+import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.text.Layout;
-import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
+import cis573.carecoor.data.ScheduleCenter;
+import cis573.carecoor.data.ScheduleCenter.Conformity;
 
 public class TrackActivity extends BannerActivity {
 	private GraphicalView graph;
@@ -32,17 +31,46 @@ public class TrackActivity extends BannerActivity {
 		setBannerTitle(R.string.track);
 		trackLayout=(LinearLayout)findViewById(R.id.track_layout);
 		
-		graph=ChartFactory.getLineChartView(this, getDemoDataset(), getDemoRenderer());
+		graph = ChartFactory.getTimeChartView(this, getConformityDataset(), getConformityRenderer(),
+				"MM/dd/yy");
+//		graph=ChartFactory.getLineChartView(this, getConformityDataset(), getDemoRenderer());
 		graph.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 		trackLayout.addView(graph);
+	}
+	
+	private XYMultipleSeriesDataset getConformityDataset() {
+		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
+		TimeSeries series = new TimeSeries("Conformity");
+		Map<Date, Conformity> map = ScheduleCenter.getOverallConformity(TrackActivity.this);
+		Iterator<Entry<Date, Conformity>> iter = map.entrySet().iterator();
+		Entry<Date, Conformity> entry;
+		while(iter.hasNext()) {
+			entry = iter.next();
+			series.add(entry.getKey(), entry.getValue().getConformity() * 100);
+		}
+		dataset.addSeries(series);
+		return dataset;
+	}
+	
+	private XYMultipleSeriesRenderer getConformityRenderer() {
+		XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+		renderer.setYAxisMin(0);
+		renderer.setYAxisMax(100);
+		renderer.setPanEnabled(true, false);
 		
+		XYSeriesRenderer r = new XYSeriesRenderer();
+		renderer.addSeriesRenderer(r);
+		r.setColor(Color.BLUE);
+	    r.setPointStyle(PointStyle.CIRCLE);
+	    r.setFillPoints(true);
+		return renderer;
 	}
 
 
 	private XYMultipleSeriesDataset getDemoDataset() {
 	    XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
 	    final int nr = 7;
-	    Random r = new Random();
+//	    Random r = new Random();
 	    
 	      XYSeries series = new XYSeries("Medicine Compliance");
 	      for (int k = 0; k < nr; k++) {

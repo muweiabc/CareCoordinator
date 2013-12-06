@@ -187,10 +187,12 @@ public class ScheduleCenter {
 	 * @return
 	 */
 	private static int getPlannedCount(Schedule schedule, Calendar calendar) {
-		Date now = new Date();
+		if(schedule.getCreateDate().before(calendar.getTime())) {	// Not started
+			return 0;
+		}
 		if(schedule.getDuration() > 0) {	// Has duration
 			Date end = getEndOfDaysAfter(schedule.getCreateDate(), schedule.getDuration());
-			if(end != null && end.before(now)) {	// Has ended
+			if(end != null && end.before(calendar.getTime())) {	// Has ended
 				return 0;
 			}
 		}

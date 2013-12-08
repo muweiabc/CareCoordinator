@@ -36,9 +36,10 @@ public class ScheduleCenter {
 		if(records != null) {
 			for(TakeRecord record : records) {
 				int compare = Utils.compareDays(record.getTakeTime(), date);
+				/*
 				if(compare < 0) {
-					break;
-				}
+					break;					
+				}*/
 				if(record.belongsTo(schedule) && compare == 0) {
 					list.add(record);
 				}
@@ -187,7 +188,8 @@ public class ScheduleCenter {
 	 * @return
 	 */
 	private static int getPlannedCount(Schedule schedule, Calendar calendar) {
-		if(schedule.getCreateDate().before(calendar.getTime())) {	// Not started
+		if(getEndOfDaysAfter(calendar.getTime(),1).before(schedule.getCreateDate())) {
+		//if(schedule.getCreateDate().before(calendar.getTime())) {	// Not started
 			return 0;
 		}
 		if(schedule.getDuration() > 0) {	// Has duration

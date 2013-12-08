@@ -1,12 +1,16 @@
 package cis573.carecoor.data;
 
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.util.Log;
 import cis573.carecoor.R;
 import cis573.carecoor.bean.Appointment;
 import cis573.carecoor.bean.Contact;
@@ -82,7 +86,24 @@ public class DataCenter {
 	
 	public static List<Schedule> getSchedules(Context context) {
 		if(mSchedules == null) {
-			mSchedules = (List<Schedule>) FileKit.readObject(context, FILENAME_SCHEDULES);
+			Calendar cal=Calendar.getInstance();
+			cal.set(2013, 11, 3,1,1,0);
+			
+			Schedule s=new Schedule(cal.getTime());
+			s.setMedicine(MedicineCenter.getMedicineList(context).get(0));
+			Schedule.Time t=new Schedule.Time(10,45);
+			List<Schedule.Time> tt=new ArrayList<Schedule.Time>();
+			tt.add(t);
+			s.setTimes(tt);
+			//Integer[] d={0,1,2,3,4,5,6};
+			//List<Integer> days=new ArrayList(Arrays.asList(d));
+			s.setDays(null);
+			s.setDuration(20);
+			s.setTracking(true);
+			mSchedules=new ArrayList<Schedule>();
+			mSchedules.add(s);
+			//Log.i("mSchedule size",new Integer(mSchedules.size()).toString());
+			//mSchedules = (List<Schedule>) FileKit.readObject(context, FILENAME_SCHEDULES);
 		}
 		return mSchedules;
 	}
@@ -131,8 +152,30 @@ public class DataCenter {
 	
 	public static List<TakeRecord> getTakeRecords(Context context) {
 		if(mTakeRecords == null) {
-			mTakeRecords = (List<TakeRecord>) FileKit.readObject(context, FILENAME_TAKE_RECORD);
+			Schedule s=DataCenter.getSchedules(context).get(0);
+			Schedule.Time time=s.getTimes().get(0);
+	
+			Calendar cal=Calendar.getInstance();
+			cal.set(2013,11,4,10,30,0);
+			Date takedate=cal.getTime();
+			cal.set(2013,11,4,time.hour,time.minute,0);
+			Date plan=cal.getTime();
+			TakeRecord take=new TakeRecord(s,takedate,plan);
+			mTakeRecords=new ArrayList<TakeRecord>();
+			mTakeRecords.add(take);
+			
+			cal.set(2013,11,6,10,35,0);
+			takedate=cal.getTime();
+			cal.set(2013,11,6,time.hour,time.minute,0);
+			plan=cal.getTime();
+			take=new TakeRecord(s,takedate,plan);		
+			mTakeRecords.add(take);
+			
+			
+			//Log.i("mTakeRecord size",new Integer(mTakeRecords.size()).toString());
+			//mTakeRecords = (List<TakeRecord>) FileKit.readObject(context, FILENAME_TAKE_RECORD);
 		}
+		
 		return mTakeRecords;
 	}
 	

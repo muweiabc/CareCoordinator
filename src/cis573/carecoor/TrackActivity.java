@@ -20,6 +20,7 @@ import android.graphics.Paint.Align;
 import android.os.Bundle;
 import android.text.style.BackgroundColorSpan;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -109,14 +110,17 @@ public class TrackActivity extends BannerActivity {
 	    ////////////////////////////////
 	    renderer.setLabelsColor(Color.DKGRAY);
 	    renderer.setChartTitle("\n\n\n\n\n\n Compliance");
-	    renderer.setChartTitleTextSize(40);
+	    renderer.setChartTitleTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+	    		22, getResources().getDisplayMetrics()));
 	    renderer.setXTitle("\n\n\n\n\n\n Dates");
 	    renderer.setYTitle("\n\n\n Compliance Percentage");
 
 	    /////////////////////////// 
-	    renderer.setLabelsTextSize(25);
+	    renderer.setLabelsTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+	    		10, getResources().getDisplayMetrics()));
 	    renderer.setAxesColor(Color.BLACK);
-	    renderer.setAxisTitleTextSize(35);
+	    renderer.setAxisTitleTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+	    		16, getResources().getDisplayMetrics()));
 
 	    renderer.setPointSize(5f);
 	    renderer.setShowGrid(true);

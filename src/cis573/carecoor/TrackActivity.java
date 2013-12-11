@@ -42,8 +42,8 @@ public class TrackActivity extends BannerActivity {
 		setBannerTitle(R.string.track);
 		initGraph();
 		viewTab1=(LinearLayout)findViewById(R.id.tab1);	
-		viewTab1.addView(weekGraph);
 		viewTab2=(LinearLayout)findViewById(R.id.tab2);
+		viewTab1.addView(weekGraph);	
 		viewTab2.addView(monthGraph);
 		mTabHost=(TabHost)findViewById(R.id.tabhost);
 		mTabHost.setup();
